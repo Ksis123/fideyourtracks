@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:ital,wght@0,400;1,1000&display=swap');
+
+.addbackgound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(225deg, #f9f0e2 10%, #e8e2e2 50%, #f6a54ebf 100%);       
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1650px 580px;
+
+}
+
+
+.addsong-bg {
+    background-color: #ffffff4c;
+    /* #423d3df1 */
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    background-image: url(../../img/Lo-fi_page2.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 1100px 600px;
+}
+
+.addsong-holder{
+    width: 90vw;
+    height: 70vh;
+    background-color: #242323b2;
+    background: transparent;
+    backdrop-filter: blur(0.25px);
+    color: #f0f5fa;
+    display: flex;
+    justify-content:left;
+    align-items:center;
+    padding-left: 280px;
+
+
+}
+
+.addsong-div{
+    background-color:#1b1b1b;
+    height:660px;
+    width: 500px;
+    border-radius: 40px;
+    display:flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-direction:column;
+    color: #D0D1D4;
+    box-shadow: 0 6px 24px #26242180;
+
+}
+
+.addsonginput{
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    height: 100%;
+    border:none; 
+    font-size: 20px;
+    border-radius:20px;
+    background-color: #302f2e;
+    color:#ffffff;
+    padding-left:10px;
+    outline: none;
+}
+
+.emailinput{
+    width:80%;
+    height:55px;
+    margin-bottom:20px;
+    position:relative; 
+    border-radius:20px;
+    padding-right:30px;
+}
+
+.emailtext{
+    font-size:16px;
+    position: absolute;
+    z-index:10;
+    transition: 0.15s ease-in-out;
+    top:-25px;
+    left:10px;
+    color:#dededd
+}
+
+.email{
+    height: 100%; 
+    top:0px;
+    left:0px;
+    width:100%;
+    position: absolute;
+    z-index:4;
+    
+}
+
+.summit-button{ 
+    margin-right:105px;
+    font-size:20px;
+    cursor: pointer;
+    transition:0.1s ease-in-out;
+    background-image: linear-gradient(225deg, #DF554F 0%, #EB9F19 60%,
+    #F49B4E 100%);    
+    box-shadow: 0 6px 24px #6c523c34;
+    color: #363535; 
+    padding: 8px 10px;
+    border-radius: 15px;
+}
+
+.summit-button:hover{
+    transform: scale(1.1);
+    background-color: #e85855;
+    box-shadow: 0 6px 24px #93795e4b;
+    color: #ffffff;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    border-color: #edb98e;
+    cursor: pointer;
+}
+
+.addsummit-button{ 
+    margin-left:260px;
+    font-size:22px;
+    cursor: pointer;
+    transition:0.1s ease-in-out;
+    background-image: linear-gradient(225deg, #DF554F 0%, #EB9F19 60%,
+    #F49B4E 100%);    
+    box-shadow: 0 6px 24px #6c523c34;
+    color: #363535; 
+    padding: 8px 40px;
+    border-radius: 20px;
+}
+
+.addsummit-button:hover{
+    transform: scale(1.1);
+    background-color: #e85855;
+    box-shadow: 0 6px 24px #93795e4b;
+    color: #ffffff;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+    border-color: #edb98e;
+    cursor: pointer;
+}
+
+.text {
+    color:#3b3938;
+    margin-top:6px;
+}
+
+.adback-button{ 
+    margin-left:20px;
+    font-size:25px;
+    cursor: pointer;
+    transition:0.1s ease-in-out;
+    color: #686867; 
+}
+
+.adback-button:hover{
+    transform: scale(1.1);
+    color: #2c2b2a;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.editback-button{ 
+    margin-top:5px;
+    margin-right:20px;
+    font-size:25px;
+    cursor: pointer;
+    transition:0.1s ease-in-out;
+    color: #706f6e; 
+    border-radius: 40px;
+    border-color: #f0f8ff;
+}
+
+.editback-button:hover{
+    color: #f06012;
+    border-radius: 15px;
+    border-color: #f38831;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.delete-button{ 
+    font-size:25px;
+    margin-left:20px;
+    cursor: pointer;
+    transition:0.1s ease-in-out;
+    color: #bab8b7; 
+    border-color: #f0f8ff;
+}
+
+.delete-button:hover{
+    color: #f03012;
+    border-radius: 15px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+

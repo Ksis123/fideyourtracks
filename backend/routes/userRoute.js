@@ -13,15 +13,21 @@ router.post("/signup", async (req, res) => {
     req.body.password = hashedPassword;
     const user = new User(req.body);
     const existingUser = await User.findOne({ email: req.body.email });
+    const oldname = await User.findOne({ name: req.body.name });
+    if (req.body.name.length < 3) {
+      return res.status(200).json({ message: "Username must be more 3 characters" });
+    }
+    if (oldname) {
+      return res.status(200).json({ message: "Username already exists" });
+    }
+    if (password.length < 6 || password.length > 12) {
+      return res.status(200).json({ message: "Password must be 6-12 characters" });
+    }
     if (existingUser) {
-      return res
-        .status(200)
-        .send({ message: "User already exists", success: false });
+      return res.status(200).send({ message: "E-mail already exists", success: false });
     } else {
       await user.save();
-      return res
-        .status(200)
-        .send({ message: "User Sign-up successfully", success: true });
+      return res.status(200).send({ message: "Sign-up successfully", success: true });
     }
   } catch (error) {
     return res.status(500).send({ message: error.message, success: false });
@@ -34,7 +40,7 @@ router.post("/signin", async (req, res) => {
     if (!user) {
       return res
         .status(200)
-        .send({ message: "User does not exist", success: false });
+        .send({ message: "E-mail does not exist", success: false });
     }
     const passwordsMatched = await bcrypt.compareSync(
       req.body.password,
@@ -45,7 +51,7 @@ router.post("/signin", async (req, res) => {
         expiresIn: "1d",
       });
       return res.status(200).send({
-        message: "User Sign-in successfully",
+        message: "Sign-in successfully",
         success: true,
         data: token,
       });
@@ -73,93 +79,89 @@ router.post("/get-user-data", authMiddleware, async (req, res) => {
   }
 });
 
-
-router.post("/forgot-password", async (req, res) => {
-  const { email } = req.body
+router.post("/verify-email", async (req, res) => {
   try {
-    const oldUser = await User.findOne({ email })
-    if (!oldUser) {
-      return res.json({ status: "User Not Exists!!" })
+    const { token } = req.body;
+    const tokenObj = await Token.findOne({ token });
+    if (!tokenObj) {
+      return res.status(200).json({ message: "Token is invalid" });
     }
-    const secret = process.env.SECRET_KEY + oldUser.password
-    const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, {
-      expiresIn: "5m",
-    })
-    const link = `http://localhost:5000/api/auth/resetpassword/${oldUser._id}/${token}`
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "b6311223@g.sut.ac.th",
-        pass: "rwmlfkylxgxyrsgz",
-      },
-    })
-
-    var mailOptions = {
-      from: "youremail@gmail.com",
-      to: email,
-      subject: "Reset : Password",
-      text: link,
+    const user = await User.findOne({ _id: tokenObj.userId.toString() });
+    if (!user) {
+      return res.status(200).json({ message: "User does not exist" });
     }
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error)
-      } else {
-        console.log("Email sent: " + info.response)
-      }
-    })
-    console.log(link)
+    user.isVerified = true;
+    await user.save();
+    await Token.findOneAndDelete({ token });
+    return res.status(200).json({ message: "E-mail Verified Successfully" });
   } catch (error) {
-    res.send({ status: "error" })
+    console.log(error);
+    res.status(400).send(error);
   }
-})
+});
 
-router.get("/resetpassword/:id/:token", async (req, res) => {
-  const { id, token } = req.params
-  console.log(req.params)
-  const oldUser = await User.findOne({ _id: id })
-  if (!oldUser) {
-    return res.json({ status: "User Not Exists!!" })
-  }
-  const secret = process.env.SECRET_KEY + oldUser.password
+router.post("/send-reset-password-link", async (req, res) => {
   try {
-    const verify = jwt.verify(token, secret)
-    res.render("forgotpassword", { email: verify.email, status: "Not Verified" })
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(200)
+        .json({ message: "User does not exist", success: false });
+    }
+    await sendEmail(user, "reset-password");
+    res.status(200).json({ message: "E-mail sent successfully", success: true });
   } catch (error) {
-    console.log(error)
-    res.send("Not Verified")
+    console.log(error);
+    res.status(400).send(error);
   }
-})
+});
 
-router.post("/resetpassword/:id/:token", async (req, res) => {
-  const { id, token } = req.params
-  const { password } = req.body
-
-  const oldUser = await User.findOne({ _id: id })
-  if (!oldUser) {
-    return res.json({ status: "User Not Exists!!" })
-  }
-  const secret = process.env.SECRET_KEY + oldUser.password
+router.post("/verify-reset-password-token", async (req, res) => {
   try {
-    const verify = jwt.verify(token, secret)
-    const encryptedPassword = await bcrypt.hash(password, 10)
-    await User.updateOne(
-      {
-        _id: id,
-      },
-      {
-        $set: {
-          password: encryptedPassword,
-        },
-      }
-    )
-
-    res.render("forgotpassword", { email: verify.email, status: "verified" })
+    const { token } = req.body;
+    const tokenObj = await Token.findOne({ token });
+    if (!tokenObj) {
+      return res
+        .status(200)
+        .json({ message: "Token is invalid", success: false });
+    }
+    const user = await User.findOne({ _id: tokenObj.userId.toString() });
+    if (!user) {
+      return res
+        .status(200)
+        .json({ message: "User does not exist", success: false });
+    }
+    res
+      .status(200)
+      .json({ message: "Token verified successfully", success: true });
   } catch (error) {
-    console.log(error)
-    res.json({ status: "Something Went Wrong" })
+    console.log(error);
+    res.status(400).send(error);
   }
-})
+});
 
-
+router.post("/reset-password", async (req, res) => {
+  try {
+    let { token, password } = req.body;
+    const tokenObj = await Token.findOne({ token });
+    if (!tokenObj) {
+      return res
+        .status(200)
+        .json({ message: "Token is invalid", success: false });
+    }
+    const user = await User.findOne({ _id: tokenObj.userId.toString() });
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+    user.password = password;
+    await user.save();
+    await Token.findOneAndDelete({ token });
+    res
+      .status(200)
+      .json({ message: "Password reset successfully", success: true });
+  } catch (error) {
+    res.status(400).send(error);
+    console.log(error);
+  }
+});
 module.exports = router;

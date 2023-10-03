@@ -112,21 +112,21 @@ function CreateEditPlaylist() {
   }, []);
 
   return (
-    <div>
-      <div className="flex items-center gap-5">
+    <div className="text-secondary">
+      <div className="flex items-center gap-5 text-secondary ">
         <i
-          class="fa-solid fa-circle-arrow-left text-5xl text-[#757272] hover:text-[#363535] transition ease-in-out delay-50 hover:scale-110"
+          class="fa-solid fa-circle-arrow-left text-5xl text-[#9c9898] hover:text-[#ff743d] transition ease-in-out delay-50 hover:scale-110"
           onClick={() => {
             navigate("/");
           }}
         ></i>
         <h1 className="text-3xl">{selectedPlaylistForEdit ? 'Edit' : 'Add'} Playlist</h1>
       </div>
-      <div className="flex justify-between gap-3 mt-5">
+      <div className="flex  gap-3 mt-5">
         <input
-          className="w-96"
+          className="rounded-full w-96"
           type="text"
-          placeholder="name"
+          placeholder="Playlist name"
           value={name}
           disabled={selectedPlaylistForEdit}
           onChange={(e) => {
@@ -134,7 +134,7 @@ function CreateEditPlaylist() {
           }}
         />
         <button
-          className="summit-button"
+          className="summit-button "
           onClick={() => {
             if (selectedPlaylistForEdit) {
               onEdit();
@@ -155,7 +155,7 @@ function CreateEditPlaylist() {
           return (
             <div
               className={`p-2 flex items-center shadow justify-between border cursor-pointer rounded ${
-                isSelected ? "border-active border-2" : "border-gray-300"
+                isSelected ? "border-active border-2" : "border-secondary border-2"
               }`}
               onClick={() => selectUnselectSong(song)}
             >

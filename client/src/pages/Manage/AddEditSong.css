@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(225deg, #f9f0e2 10%, #e8e2e2 50%, #f6a54ebf 100%);       
+    background-image: linear-gradient(225deg, #f9f0e2 10%, #e8e2e2 50%, #dd871dbf 100%);       
     background-position: center;
     background-repeat: no-repeat;
     background-size: 1650px 580px;
@@ -21,7 +21,7 @@
     background-image: url(../../img/Lo-fi_page2.svg);
     background-repeat: no-repeat;
     background-position: right;
-    background-size: 1100px 600px;
+    background-size: 800px 600px;
 }
 
 .addsong-holder{
@@ -34,15 +34,15 @@
     display: flex;
     justify-content:left;
     align-items:center;
-    padding-left: 280px;
-
+    padding-left: 50px;
+    padding-top: 20px;
 
 }
 
 .addsong-div{
     background-color:#1b1b1b;
     height:660px;
-    width: 500px;
+    width: 960px;
     border-radius: 40px;
     display:flex;
     justify-content:space-evenly;
@@ -69,10 +69,27 @@
 .emailinput{
     width:80%;
     height:55px;
-    margin-bottom:20px;
     position:relative; 
     border-radius:20px;
     padding-right:30px;
+}
+
+.doubleinput{
+    height:60px;
+    margin-bottom:20px;
+    position:relative; 
+    border-radius:20px;
+}
+
+.selectinput{
+    font-family: 'Nunito', sans-serif;
+    height: 100%;
+    border:none; 
+    font-size: 20px;
+    border-radius:20px;
+    background-color: #302f2e;
+    color:#ffffff;
+    padding-left:10px;
 }
 
 .emailtext{
@@ -96,24 +113,23 @@
 }
 
 .summit-button{ 
-    margin-right:105px;
     font-size:20px;
     cursor: pointer;
     transition:0.1s ease-in-out;
     background-image: linear-gradient(225deg, #DF554F 0%, #EB9F19 60%,
     #F49B4E 100%);    
-    box-shadow: 0 6px 24px #6c523c34;
+    box-shadow: 5px 18px 22px #cf6f1b34;
     color: #363535; 
     padding: 8px 10px;
-    border-radius: 15px;
+    border-radius: 25px;
 }
 
 .summit-button:hover{
     transform: scale(1.1);
     background-color: #e85855;
-    box-shadow: 0 6px 24px #93795e4b;
+    box-shadow: 5px 18px 22px #93795e4b;
     color: #ffffff;
-    border-radius: 5px;
+    border-radius: 15px;
     transition: 0.3s ease-in-out;
     border-color: #edb98e;
     cursor: pointer;
@@ -153,12 +169,12 @@
     font-size:25px;
     cursor: pointer;
     transition:0.1s ease-in-out;
-    color: #686867; 
+    color: #bfbfb9; 
 }
 
 .adback-button:hover{
     transform: scale(1.1);
-    color: #2c2b2a;
+    color: #f27507;
     transition: 0.3s ease-in-out;
     cursor: pointer;
 }

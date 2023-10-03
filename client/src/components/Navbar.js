@@ -141,7 +141,7 @@ const Navbar = () => {
             </button>
             <button className="text-[#b7b5b5] hover:text-primary drop-shadow-lg"
                 onClick={() => {
-                    
+                    navigate("/cart");
                 }}>
                 <i className="fa-solid fa-cart-shopping fa-xl"></i>
             </button>

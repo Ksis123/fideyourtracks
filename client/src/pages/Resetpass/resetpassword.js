@@ -7,24 +7,30 @@ import { HideLoading, ShowLoading } from "../../redux/alertsSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
-
-
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 function ResetPassword() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState({
-    email: "",
-  });
-  const resetpassword = async () => {
+  const [email, setEmail] = useState("");
+
+  const resetpassword = async (e) => {
+    e.preventDefault()
     try {
       dispatch(ShowLoading());
-      const response = await axios.post("/api/users/forgot-password", user);
+      const response = await axios.post("/api/users/send-reset-password-link", email);
       dispatch(HideLoading());
       if (response.data.success) {
-        toast.success(response.data.message);
+        await MySwal.fire({
+          title: <strong>{response.data.message}</strong>,
+          showConfirmButton: false,
+          html: 'Welcome to the Club',
+          icon: 'success',
+          timer: 1500
+        })
         localStorage.setItem("token", response.data.data);
         navigate("/");
       } else {
@@ -37,49 +43,52 @@ function ResetPassword() {
       console.log(error);
     }
   };
-  
-    return (
-      <div className="backgoundre">     
-          <div className="reset-bg">
-            <div className="reset-holder">
-                <form className="reset-form">
-                    <div className="reset-div">
-                          <div className="welcome">
-                              <h4><i class="fa-solid fa-envelope"></i>  Reset Password</h4>             
-                          </div>
-                          <div className="emailinput">
-                              <div className="emailtext">
-                                  E-mail
-                              </div>
-                              <div className="email">
-                                    <input
-                                            type="text"
-                                            className="sigininput"
-                                            placeholder="Enter email"
-                                            value={user.email}
-                                            onChange={(e) => setUser({ ...user, email: e.target.value })} 
-                                    />
-                              </div>
-                          </div>
-                          <div className="submit">
-                            <button type="submit" className="sigup-button" onClick={resetpassword}>
-                                Submit
-                            </button>
-                        </div>
-                            <p>
-                                <a className="resetsigninspan" href="/signin">Sign In</a> |
-                                <a className="resetsignupspan" href="/signup">Sign Up </a>
-                            </p>
-                      </div>
-                      <br/>
-                        <div className='text'>
-                            <p>Copyright © 2023 Fideyourtracks by Ksis123</p>
-                        </div>
-                </form>
+
+  return (
+    <div className="backgound">
+      <div className="reset-bg">
+        <div className="reset-holder">
+          <form className="reset-form">
+            <div className="reset-div">
+              <div className="welcome">
+                <h4><i class="fa-solid fa-envelope"></i>  Reset Password</h4>
+              </div>
+              <div className="emailinput">
+                <div className="emailtext">
+                  E-mail
+                </div>
+                <div className="email">
+                  <input
+                    type="text"
+                    className="sigininput"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="submit">
+                <button type="submit" className="sigin-button" onClick={resetpassword}>
+                  Send-Link
+                </button>
+              </div>
+              <p> Back to
+                <a className="resetsigninspan hover:underline" onClick={() => navigate("/signin")}>
+                  Sign in 
+                </a> |
+                <a className="resetsignupspan hover:underline" onClick={() => navigate("/signup")}>Sign Up </a>
+              </p>
+              
             </div>
+            <br />
+            <div className='text'>
+              <p>Copyright © 2023 Fideyourtracks by Ksis123</p>
+            </div>
+          </form>
         </div>
       </div>
-    )
+    </div>
+  )
 }
 export default ResetPassword;
 

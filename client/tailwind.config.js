@@ -6,12 +6,12 @@ module.exports = {
     extend: {
       colors: {
         "primary": "#ff6d38",
-        "secondary": "#262626",
-        "active": "#ed9624",
+        "secondary": "#ffffff",
+        "active": "#ff8b0f",
         transparent: 'transparent',
         current: 'currentColor',
         'white': '#ffffff',
-        'purple': '#3f3cbb',
+        'red': '#ff8b0f',
         'midnight': '#121063',
         'metal': '#565584',
         'tahiti': '#3ab7bf',

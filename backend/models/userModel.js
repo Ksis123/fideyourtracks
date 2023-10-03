@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     playlists: { type: Array, required: false },
-    isAdmin: { type: Boolean, required: false, default: false },
+    isAdmin: { type: Boolean, required: false, default: true },
   },
   { timestamps: true }
 );

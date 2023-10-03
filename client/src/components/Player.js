@@ -69,8 +69,8 @@ function Player() {
   }, []);
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 shadow-lg  ">
-      <div className="flex justify-between items-center p-5 shadow-xl bg-[#201f1f] ">
+    <div className="absolute bottom-0 left-0 right-0 shadow-lg ">
+      <div className="flex justify-between items-center p-5  bg-[#1f1e1dfe]">
         <div className="flex items-center gap-6">
           <div className="w-96 loaderplayer">
             <span className='strokes'></span>
@@ -85,7 +85,7 @@ function Player() {
           </div>
         </div>
 
-        <div className="w-full flex flex-col items-center drop-shadow-lg">
+        <div className="w-full flex flex-col items-center ">
           <audio
             src={currentSong?.src}
             ref={audioRef}
@@ -93,21 +93,26 @@ function Player() {
               dispatch(SetCurrentTime(e.target.currentTime));
             }}
           ></audio>
-          <div className="flex gap-20 items-center">
+          <div className="flex gap-20 items-center ">
             <div className="text-[#bda599c2] hover:text-[#ffffff] transition ease-in-out delay-50 hover:scale-110">
-              <i class="fa-solid fa-backward-step text-4xl" onClick={onPrev}></i>
+              <i class="fa-solid fa-backward-step text-4xl drop-shadow-2xl" onClick={onPrev}></i>
             </div>
             {isPlaying ? (
-              <div className="text-[#ff6e35] hover:text-[#ff6532] transition ease-in-out delay-50 hover:scale-110 opacity-80">
-                <i className="fa-solid fa-circle-pause fa-2xl text-6xl " onClick={onPause}></i>
+              <div className="text-[#ff6e35] hover:text-[#ff6532] transition ease-in-out delay-50 hover:scale-110 opacity-80 ">
+                <i className="fa-solid fa-circle-pause fa-2xl text-6xl drop-shadow-2xl" 
+                onClick={onPause}>
+                </i>
               </div>
             ) : (
               <div className="text-[#ff6d38c9] hover:text-[#ff6532] transition ease-in-out delay-50 hover:scale-110 opacity-80">
-                <i className="fa-solid fa-circle-play fa-2xl text-6xl" onClick={onPlay}></i>
+                <i className="fa-solid fa-circle-play fa-2xl text-6xl shadow-lg  drop-shadow-2xl " 
+                onClick={onPlay}>
+
+                </i>
               </div>
             )}
             <div className="text-[#bda599c2] hover:text-[#ffffff] transition ease-in-out delay-50 hover:scale-110">
-              <i className="fa-solid fa-forward-step fa-xl text-4xl" onClick={onNext}></i>
+              <i className="fa-solid fa-forward-step fa-xl text-4xl drop-shadow-2xl" onClick={onNext}></i>
             </div>
           </div>
           <div className="flex gap-3 items-center w-full">

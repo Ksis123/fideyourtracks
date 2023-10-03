@@ -19,7 +19,7 @@ function Playlists() {
   );
   const allPlylists = [
     {
-      name: "all Songs",
+      name: "default",
       songs: allSongs,
     },
     ...user.playlists,
@@ -65,9 +65,9 @@ function Playlists() {
   }, [selectedPlaylist, allSongs]);
 
   return (
-    <div className="drop-shadow-lg">
+    <div className="drop-shadow-lg shadow-[#ff8b0f]">
       <div className="flex justify-between w-full">
-        <h1 className="text-secondary text-2xl ">Playlists</h1>
+        <h1 className="text-secondary text-2xl "><i className="fa-solid fa-list-ol"/> Playlists</h1>
         <button className="p-2 drop-shadow-lg rounded-full bg-[#696968] hover:bg-[#f68216] transition ease-in-out delay-50 hover:scale-110">
           <h1
             className="cursor-pointer text-xl text-white"
@@ -79,12 +79,12 @@ function Playlists() {
           </h1>
         </button>
       </div>
-      <div className="grid grid-cols-3 gap-3 mt-10">
+      <div className="grid grid-cols-3 gap-3 mt-10 text-secondary drop-shadow-lg">
         {allPlylists?.map((playlist, index) => {
           const isSelected = playlist?.name === selectedPlaylist?.name;
           return (
             <div
-              className={`flex flex-col gap-1 shadow border rounded p-2 cursor-pointer ${isSelected && "border-active border-2"
+              className={`flex flex-col gap-1 bg-[#313237] shadow border rounded p-2 cursor-pointer ${isSelected && "border-active border-2"
                 }`}
               onClick={() => {
                 dispatch(SetSelectedPlaylist(playlist));
@@ -95,14 +95,14 @@ function Playlists() {
               <hr />
               <div className="flex gap-6 justify-between">
                 <i
-                  className="fa-solid fa-trash text-2xl text-[#7f6f67db] hover:text-[#312925db] transition ease-in-out delay-40"
+                  className="fa-solid fa-trash text-2xl text-[#606060db] hover:text-[#fb352edb] transition ease-in-out delay-40"
                   onClick={() => {
                     onDelete(playlist.name);
                   }}
                 ></i>
 
                 <i
-                  className="fa-solid fa-pen text-2xl text-[#7f6f67db] hover:text-[#312925db] transition ease-in-out delay-40"
+                  className="fa-solid fa-pen text-2xl text-[#7d7470db] hover:text-[#ff8325db] transition ease-in-out delay-40"
                   onClick={() => {
                     dispatch(SetSelectedPlaylistForEdit(playlist));
                     navigate(`/create-edit-playlist`);

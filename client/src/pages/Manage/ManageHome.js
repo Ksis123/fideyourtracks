@@ -19,18 +19,18 @@ function ManageHome() {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <h1 className="text-3xl text-gray-700">All Songs</h1>
+      <div className="flex justify-between drop-shadow-lg">
+        <h1 className="text-3xl text-secondary">All Songs</h1>
         <button
           className="summit-button"
           onClick={() => {
             navigate("/manage/add-edit-song");
           }}
         >
-          Add Song <i className="fa-solid fa-circle-right" />
+          Upload <i className="fa-solid fa-circle-right drop-shadow-lg" />
         </button>
       </div>
-      <table className="w-full mt-5">
+      <table className="w-full mt-5 bg-[#161414e0] drop-shadow-lg">
         <thead className="w-full">
           <tr>
             <th>Title</th>
@@ -42,7 +42,7 @@ function ManageHome() {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-secondary">
           {allSongs.map((song) => (
             <tr key={song.id}>
               <td>{song.title}</td>

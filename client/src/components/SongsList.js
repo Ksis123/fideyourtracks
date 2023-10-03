@@ -38,30 +38,39 @@ function SongsList() {
   }, [selectedPlaylist, searchKey]);
 
   return (
-    <div className="flex flex-col gap-3 drop-shadow-lg">
-
+    <div className="flex flex-col gap-3 drop-shadow-lg text-secondary">
+      {/* px-4 hover:px-8 */}
+      <div className="flex cursor-pointer text-[#ff724a] font-semibold">
+        <div className="w-1/2 pl-[6rem]"><h1>Title</h1></div>
+        <div className="w-1/2 pl-[9rem]"><h1>Artist</h1></div>
+        <div className="w-1/2 pl-[10rem]"><h1>Genre</h1></div>
+        <div className="w-1/2 pl-[8rem]"><h1>Price</h1></div>
+        <div className="w-1/2 "><h1>Duration</h1></div>
+      </div>
+      < hr/>
       <div className="overflow-y-scroll h-[54vh] p-3">
         {songsToPlay.map((song, index) => {
           const isPlaying = currentSong?._id === song._id;
           return (
+
             <div
-              className={`p-2 flex items-center justify-between cursor-pointer ${
-                isPlaying && "shadow rounded text-active font-semibold border-active border-2  delay-100"
-              }`}
+              className={`p-1 flex items-center justify-between cursor-pointer ${isPlaying && "shadow rounded text-active font-semibold border-active border-2  delay-150"
+                }`}
               onClick={() => {
                 dispatch(SetCurrentSong(song));
                 dispatch(SetCurrentSongIndex(index));
               }}
-            > <i className="fa-solid fa-music text-[#ff8431]"></i>
-              <div>
-                <h1>{song.title}</h1>
-              </div>
-              <div>
-                <h1>{song.artist}</h1>
-              </div>
-              <div>
-                <h1>{song.duration}</h1>
-              </div>
+            >
+              <i className={`fa-solid fa-circle-play ${isPlaying && "fa-solid fa-circle-pause fa-beat-fade  delay-150"
+                }`}
+              />
+              <div className="w-1/2"><h1>{song.title}</h1></div>
+              <div className="w-1/2"><h1>{song.artist}</h1></div>
+              <div className="w-1/2"><h1>{song.genre}</h1></div>
+              <div className="w-1/2"><h1>THB {song.price}</h1></div>
+
+              <div><h1>{song.duration}</h1></div>
+
             </div>
           );
         })}

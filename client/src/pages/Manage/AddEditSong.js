@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import "./AddEditSong.css"
 
 
@@ -8,6 +8,7 @@ import { FileUploader } from "react-drag-drop-files";
 import { HideLoading, ShowLoading } from "../../redux/alertsSlice";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Select from 'react-select';
 import { SetAllSongs } from "../../redux/userSlice";
 
 function AddEditSong() {
@@ -21,14 +22,28 @@ function AddEditSong() {
     title: "",
     artist: "",
     price: "",
+    genre: "",
     duration: "",
     file: "",
   });
+
+  const options = [
+    { value: 'Classic', label: 'Classic' }, { value: 'Blue', label: 'Blue' }, { value: 'Rock', label: 'Rock' },{ value: 'Alternative', label: 'Alternative' },
+    { value: 'EDM', label: 'EDM' }, { value: 'Pop ', label: 'Pop ' }, { value: 'R&B', label: 'R&B' },
+    { value: 'Hip-hop', label: 'Hip-hop' }, { value: 'Instrumental', label: 'Instrumental' }, { value: 'Indie', label: 'Indie' },
+    { value: 'Anime', label: 'Anime' }, { value: 'Gaming', label: 'Gaming' }, { value: 'Chill', label: 'Chill' },
+  ];
 
   const handleChange = (file) => {
     setSong({ ...song, file: file });
     console.log(file);
   };
+
+  const handleChangeGenre = (genre) => {
+    setSong({ ...song, genre: genre });
+    console.log(genre);
+  };
+  
 
   const onAdd = async () => {
     try {
@@ -44,7 +59,7 @@ function AddEditSong() {
       });
       dispatch(HideLoading());
       if (response.data.success) {
-        toast.success("Song added successfully");
+        toast.success("Track Upload successfully");
         dispatch(SetAllSongs(response.data.data));
         navigate("/manage");
       } else {
@@ -71,7 +86,7 @@ function AddEditSong() {
       });
       dispatch(HideLoading());
       if (response.data.success) {
-        toast.success("Song updated successfully");
+        toast.success("Track updated successfully");
         dispatch(SetAllSongs(response.data.data));
         navigate("/manage");
       } else {
@@ -102,7 +117,7 @@ function AddEditSong() {
   return (
     <div className="addbackgound">
       <div className="addsong-bg">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 text-secondary">
           <button className="adback-button">
             <i
               class="fa-solid fa-circle-arrow-left text-5xl"
@@ -110,10 +125,9 @@ function AddEditSong() {
                 navigate("/manage");
               }}
             ></i>
-            </button>
-          <h1 className="text-4xl">{songId ? "Edit" : "Add"} Song</h1>
+          </button>
+          <h1 className="text-4xl">{songId ? "Edit" : "Upload"} Song</h1>
         </div>
-
         <div className="addsong-holder">
           <div className="addsong-div">
             <div className="welcome">
@@ -141,62 +155,89 @@ function AddEditSong() {
                 <input
                   type="text"
                   className="sigininput"
-                  placeholder="Enter your aka | artist"
+                  placeholder="Enter artist name"
                   value={song.artist}
                   onChange={(e) => { setSong({ ...song, artist: e.target.value }) }}
                 />
               </div>
             </div>
-            <div className="emailinput">
-              <div className="emailtext">
-                Price <small>( THB )</small>
+            <div className="doubleinput gap-5 flex justify-between">
+              <div className="w-1/2">
+                <div className="emailtext">
+                  Price <small>( THB )</small>
+                </div>
+                <div className="">
+                  <input
+                    type="text"
+                    className="selectinput"
+                    placeholder="Enter price"
+                    value={song.price}
+                    onChange={(e) => { setSong({ ...song, price: e.target.value }) }}
+                  />
+                </div>
               </div>
-              <div className="email">
-                <input
-                  type="text"
-                  className="sigininput"
-                  placeholder="Enter price this songs"
-                  value={song.price}
-                  onChange={(e) => { setSong({ ...song, price: e.target.value }) }}
-                />
+              <div className="w-1/2">
+                <div className="emailtext translate-x-[17rem] ">
+                  Duration
+                </div>
+                <div className="">
+                  <input
+                    type="text"
+                    className="selectinput"
+                    placeholder="Enter duration"
+                    value={song.duration}
+                    onChange={(e) => { setSong({ ...song, duration: e.target.value }) }}
+                  />
+                </div>
+              </div>
+              {/* <Select
+                name="genre"
+                value={song.genre}
+                className="w-1/2 drop-shadow-lg"
+                onChange={handleChangeGenre}
+                options={options}
+                placeholder="Select Genre"
+              /> */}
+              <div className="w-1/2">
+                <div className="emailtext translate-x-[35rem] ">
+                  Genre
+                </div>
+                <div className="">
+                  <input
+                    type="text"
+                    className="selectinput"
+                    placeholder="Enter duration"
+                    value={song.genre}
+                    onChange={(e) => { setSong({ ...song, genre: e.target.value }) }}
+                  />
+                </div>
               </div>
             </div>
-            <div className="emailinput">
-              <div className="emailtext">
-                Duration
+            <div>
+              <FileUploader
+                handleChange={handleChange}
+                name="file"
+                types={fileTypes}
+              />
+              {song.file && <h1 className="text-primary">{song.file.name}</h1>}
+              
+              <div className="p-4 flex justify-end">
+                {songId && songId !== "" ? (
+                  <button
+                    className="addsummit-button"
+                    onClick={onEdit}
+                  >
+                    Update
+                  </button>
+                ) : (
+                  <button
+                    className="addsummit-button"
+                    onClick={onAdd}
+                  >
+                    Upload
+                  </button>
+                )}
               </div>
-              <div className="email">
-                <input
-                  type="text"
-                  className="sigininput"
-                  placeholder="Enter duration this songs"
-                  value={song.duration}
-                  onChange={(e) => { setSong({ ...song, duration: e.target.value }) }}
-                />
-              </div>
-            </div>
-            <FileUploader
-              handleChange={handleChange}
-              name="file"
-              types={fileTypes}
-            />
-            {song.file && <h1 className="text-gray-500">{song.file.name}</h1>}
-            <div className="flex justify-end">
-              {songId && songId !== "" ? (
-                <button
-                  className="addsummit-button"
-                  onClick={onEdit}
-                >
-                  Update
-                </button>
-              ) : (
-                <button
-                  className="addsummit-button"
-                  onClick={onAdd}
-                >
-                  Add
-                </button>
-              )}
             </div>
           </div>
 

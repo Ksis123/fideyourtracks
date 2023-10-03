@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import './Login.css'
 
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/alertsSlice";
-import toast from "react-hot-toast";
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 function Signup() {
   const navigate = useNavigate();
@@ -15,19 +19,35 @@ function Signup() {
     email: "",
     password: "",
   });
-  const signup = async () => {
+  const signup = async (e) => {
+
+    e.preventDefault()
     try {
       dispatch(ShowLoading());
       const response = await axios.post("/api/users/signup", user);
       dispatch(HideLoading());
       if (response.data.success) {
-        toast.success(response.data.message);
+        await MySwal.fire({
+          title: <strong>{response.data.success}</strong>,
+          showConfirmButton: false,
+          html: 'Please Keep value to Sign-in',
+          icon: 'success',
+          timer: 1600
+        })
         navigate("/signin");
       } else {
-        toast.error(response.data.message);
+        MySwal.fire({
+          title: <strong>{response.data.message}</strong>,
+          html: 'Please enter valid value',
+          icon: 'error'
+        })
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      MySwal.fire({
+        title: <strong>Please enter Value Form</strong>,
+        html: 'Please enter valid value',
+        icon: 'error'
+      })
       dispatch(HideLoading());
       console.log(error);
     }
@@ -84,7 +104,7 @@ function Signup() {
                 </div>
               </div>
               <div>
-                <button className="back-button" onClick={() => { window.location.href = "./signin" }}>
+                <button className="back-button" onClick={() => { navigate("/signin") }}>
                   <i className="fa-solid fa-circle-arrow-left"></i> Back
                 </button>
                 <button type="submit" className="sigup2-button" onClick={signup}>

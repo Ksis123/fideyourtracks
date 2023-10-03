@@ -5,7 +5,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { HideLoading, ShowLoading } from "../../redux/alertsSlice";
 import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 function Signin() {
   const dispatch = useDispatch();
@@ -14,21 +17,36 @@ function Signin() {
     email: "",
     password: "",
   });
-  const signin = async () => {
+  const signin = async (e) => {
+    e.preventDefault()
+
     try {
       dispatch(ShowLoading());
       const response = await axios.post("/api/users/signin", user);
       dispatch(HideLoading());
       if (response.data.success) {
-        toast.success(response.data.message);
+        await MySwal.fire({
+          title: <strong>{response.data.message}</strong>,
+          showConfirmButton: false,
+          html: 'Welcome to the Club',
+          icon: 'success',
+          timer: 1500
+        })
         localStorage.setItem("token", response.data.data);
         navigate("/");
       } else {
-        toast.error(response.data.message);
-        alert(response.data.message);
+        MySwal.fire({
+          title: <strong>{response.data.message}</strong>,
+          html: 'Please enter valid value',
+          icon: 'error',
+        })
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      MySwal.fire({
+        title: <strong>Something went wrong</strong>,
+        html: 'Please enter valid value',
+        icon: 'error',
+      })
       dispatch(HideLoading());
       console.log(error);
     }
@@ -66,7 +84,7 @@ function Signin() {
                     className="sigininput"
                     placeholder="Enter e-mail"
                     value={user.email}
-                    onChange={(e) => setUser({ ...user, email: e.target.value })}                  
+                    onChange={(e) => setUser({ ...user, email: e.target.value })}
                   />
                 </div>
               </div>
@@ -85,18 +103,16 @@ function Signin() {
                 </div>
               </div>
               <div>
-                <button className="sigup-button" onClick={() => {
-                  window.location.href = "./signup"
-                }}> Sign up
+                <button className="sigup-button" onClick={() => { navigate("/signup") }}>
+                  Sign up
                 </button>
-                <button type="submit" className="sigin-button"  onClick={signin}
+                <button type="submit" className="sigin-button" onClick={signin}
                 >
                   Sign in
                 </button>
               </div>
-
               <span className="signup">Don't you
-                <span className="signupspan" onClick={() => { window.location.href = "./resetpassword" }}>
+                <span className="signupspan" onClick={() => { navigate("/resetpassword") }}>
                   Forgot Password
                 </span>
               </span>

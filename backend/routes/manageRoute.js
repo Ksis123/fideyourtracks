@@ -35,11 +35,12 @@ router.post("/add-song", authMiddleware, upload.single("file"), async (req, res)
             src: result.url,
             duration: req.body.duration,
             price: req.body.price,
+            genre: req.body.genre
           });
           await newsong.save();
           const allSongs = await Song.find();
           res.status(200).send({
-            message: "Song added successfully",
+            message: "Upload track successfully",
             success: true,
             data: allSongs,
           });
@@ -72,6 +73,8 @@ router.post("/edit-song", authMiddleware, upload.single("file"), async (req, res
       src: response ? response.url : req.body.src,
       duration: req.body.duration,
       price: req.body.price,
+      genre: req.body.genre,
+
     });
     const allSongs = await Song.find();
     res.status(200).send({

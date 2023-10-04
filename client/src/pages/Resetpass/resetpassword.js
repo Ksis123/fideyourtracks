@@ -3,9 +3,9 @@ import "./resetpassword.css"
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 import { HideLoading, ShowLoading } from "../../redux/alertsSlice";
 import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -14,31 +14,37 @@ const MySwal = withReactContent(Swal)
 function ResetPassword() {
 
   const dispatch = useDispatch();
+  const setForgotPasswordLinkSent = useState(false);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+  });  
 
   const resetpassword = async (e) => {
     e.preventDefault()
     try {
       dispatch(ShowLoading());
-      const response = await axios.post("/api/users/send-reset-password-link", email);
+      const response = await axios.post("/api/users/send-reset-password-link", user);
       dispatch(HideLoading());
       if (response.data.success) {
         await MySwal.fire({
           title: <strong>{response.data.message}</strong>,
           showConfirmButton: false,
-          html: 'Welcome to the Club',
+          html: 'we send link to your E-mail',
           icon: 'success',
           timer: 1500
         })
-        localStorage.setItem("token", response.data.data);
-        navigate("/");
+        setForgotPasswordLinkSent(true);
       } else {
-        toast.error(response.data.message);
-        alert(response.data.message);
+        MySwal.fire({
+          title: <strong>Please check Your E-mail</strong>,
+          html: 'to Verified reset Password',
+          showConfirmButton: false,
+          timer: 1000,
+          icon: 'warning'
+        });
       }
     } catch (error) {
-      toast.error("Something went wrong");
       dispatch(HideLoading());
       console.log(error);
     }
@@ -62,8 +68,8 @@ function ResetPassword() {
                     type="text"
                     className="sigininput"
                     placeholder="Enter email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={user.email}
+                    onChange={(e) => setUser({ ...user, email: e.target.value })}
                   />
                 </div>
               </div>
@@ -74,11 +80,10 @@ function ResetPassword() {
               </div>
               <p> Back to
                 <a className="resetsigninspan hover:underline" onClick={() => navigate("/signin")}>
-                  Sign in 
-                </a> |
-                <a className="resetsignupspan hover:underline" onClick={() => navigate("/signup")}>Sign Up </a>
+                  Sign in
+                </a>
               </p>
-              
+
             </div>
             <br />
             <div className='text'>

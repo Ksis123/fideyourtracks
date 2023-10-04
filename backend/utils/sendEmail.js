@@ -11,20 +11,7 @@ module.exports = async (savedUser, type) => {
     });
     const savedToken = await newToken.save();
 
-    let emailContent = "";
-
-    if (type === "verify-email") {
-      emailContent = `
-    <h3>Welcome to the application</h3>
-    <p>
-      Please click on the following link to verify your email and complete your Sige-Up:
-    </p>
-    <a href="http://localhost:3000/users/verify-email/${savedToken.token}">
-       Click here to Verified
-    </a>
-  `;
-    } else {
-      emailContent = `
+    emailContent = `
     <h3>Password Reset</h3>
     <p>
       Please click on the following link to reset your password:
@@ -33,7 +20,7 @@ module.exports = async (savedUser, type) => {
     Click here to reset Your Password
     </a>
   `;
-    }
+
 
     const transporter = nodemailer.createTransport({
       service: "gmail",

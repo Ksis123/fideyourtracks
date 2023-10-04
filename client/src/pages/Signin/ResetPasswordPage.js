@@ -26,7 +26,6 @@ function ResetPasswordPage() {
       toast.remove();
       if (response.data.success) {
         setPasswordResetSuccess(true);
-        toast.success("Password reset successfully!");
         await MySwal.fire({
           title: <strong>Password reset successfully</strong>,
           showConfirmButton: false,

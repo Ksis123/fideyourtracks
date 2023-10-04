@@ -124,7 +124,7 @@ function CreateEditPlaylist() {
       </div>
       <div className="flex  gap-3 mt-5">
         <input
-          className="rounded-full w-96"
+          className="rounded-full w-96 text-[#31302e] "
           type="text"
           placeholder="Playlist name"
           value={name}
@@ -162,7 +162,7 @@ function CreateEditPlaylist() {
               <div>
                 <h1>{song.title} </h1>
                 <h1>
-                  {song.artist} - {song.price} - {song.duration}
+                  {song.artist} - THB {song.price} - {song.duration}
                 </h1>
               </div>
             </div>

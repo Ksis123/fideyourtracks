@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import "./AddEditSong.css"
 import Player from "../../components/Player";
 
 function ManageHome() {
-  const [selectedSongForEdit, setSelectedSongForEdit] = React.useState(null);
   const { allSongs, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     if (user) {

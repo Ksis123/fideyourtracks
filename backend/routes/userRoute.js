@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const sendEmail = require("../utils/sendEmail");
+const Token = require("../models/tokenModel");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 router.post("/signup", async (req, res) => {
@@ -76,27 +78,6 @@ router.post("/get-user-data", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     return res.status(500).send({ message: error.message, success: false });
-  }
-});
-
-router.post("/verify-email", async (req, res) => {
-  try {
-    const { token } = req.body;
-    const tokenObj = await Token.findOne({ token });
-    if (!tokenObj) {
-      return res.status(200).json({ message: "Token is invalid" });
-    }
-    const user = await User.findOne({ _id: tokenObj.userId.toString() });
-    if (!user) {
-      return res.status(200).json({ message: "User does not exist" });
-    }
-    user.isVerified = true;
-    await user.save();
-    await Token.findOneAndDelete({ token });
-    return res.status(200).json({ message: "E-mail Verified Successfully" });
-  } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
   }
 });
 

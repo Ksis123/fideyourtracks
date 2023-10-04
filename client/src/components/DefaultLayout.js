@@ -8,7 +8,7 @@ function DefaultLayout({ children }) {
             <div className='bg-[#1b1919f3] drop-shadow-2xl'>
                 <Navbar />
             </div>
-            <div className="content m-12 p-5">
+            <div className="content p-5">
                 {children}
             </div>
         </div>

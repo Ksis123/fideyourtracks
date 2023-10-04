@@ -19,7 +19,7 @@ function Playlists() {
   );
   const allPlylists = [
     {
-      name: "default",
+      name: "total",
       songs: allSongs,
     },
     ...user.playlists,
@@ -84,14 +84,14 @@ function Playlists() {
           const isSelected = playlist?.name === selectedPlaylist?.name;
           return (
             <div
-              className={`flex flex-col gap-1 bg-[#313237] shadow border rounded p-2 cursor-pointer ${isSelected && "border-active border-2"
+              className={`flex flex-col gap-1 bg-[#313237] shadow border rounded p-2 cursor-pointer ${isSelected && "border-active "
                 }`}
               onClick={() => {
                 dispatch(SetSelectedPlaylist(playlist));
               }}
             >
-              <h1 className="text-3xl">{playlist?.name}</h1>
-              <h1 className="text-xl">{playlist?.songs?.length} Songs</h1>
+              <h1 className="text-xl">{playlist?.name}</h1>
+              <h1 className="text-sm">{playlist?.songs?.length} Songs</h1>
               <hr />
               <div className="flex gap-6 justify-between">
                 <i

@@ -61,11 +61,11 @@ function SongsList() {
       </div>
       {/* px-4 hover:px-8 */}
       <div className="flex cursor-pointer text-[#ff724a] font-semibold">
-        <div className="w-1/2 pl-[10rem]"><h1>Title</h1></div>
-        <div className="w-1/2 pl-[12rem]"><h1>Artist</h1></div>
-        <div className="w-1/2 pl-[12rem]"><h1>Genre</h1></div>
-        <div className="w-1/2 pl-[12rem]"><h1>Price</h1></div>
-        <div className="w-1/2 pl-[6rem]"><i class="far fa-clock" /></div>
+        <div className="w-1/2 pl-[12rem]"><h1>Title</h1></div>
+        <div className="w-1/2 pl-[18rem]"><h1>Artist</h1></div>
+        <div className="w-1/2 pl-[18rem]"><h1>Genre</h1></div>
+        {/* <div className="w-1/2 pl-[12rem]"><h1>Price</h1></div> */}
+        <div className="w-1/2 pl-[10rem]"><i class="far fa-clock" /></div>
       </div>
       < hr />
       <div className="overflow-y-scroll h-[54vh] p-3">
@@ -87,7 +87,7 @@ function SongsList() {
               <div className="w-1/2"><h1>{song.title}</h1></div>
               <div className="w-1/2"><h1>{song.artist}</h1></div>
               <div className="w-1/2"><h1>{song.genre}</h1></div>
-              <div className="w-1/2"><h1>{song.price} THB</h1></div>
+              {/* <div className="w-1/2"><h1>{song.price} THB</h1></div> */}
 
               <div><h1>{song.duration}</h1></div>
 

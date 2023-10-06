@@ -1,14 +1,46 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import "./AddEditSong.css"
 import Player from "../../components/Player";
 
+import { useDispatch, useSelector } from "react-redux";
+import { HideLoading, ShowLoading } from "../../redux/alertsSlice";
+import axios from "axios";
+import toast from "react-hot-toast";
+
 function ManageHome() {
   const { allSongs, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+
+
+  const onDelete = async (name) => {
+    try {
+      dispatch(ShowLoading());
+      const response = await axios.post(
+        "/api/user/deletesong",
+        {
+          name,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      dispatch(HideLoading());
+      if (response.data.success) {
+        toast.success("Tracks deleted successfully");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      dispatch(HideLoading());
+      toast.error("Something went wrong");
+    }
+  };
+
 
   useEffect(() => {
     if (user) {
@@ -61,10 +93,9 @@ function ManageHome() {
                   ></i>
                 </button>
                 <button className="delete-button">
-                  <i className="fa-solid fa-trash"
+                  <i className="fa-solid fa-trash" onClick={(onDelete)}
                   ></i>
                 </button>
-
               </td>
             </tr>
           ))}

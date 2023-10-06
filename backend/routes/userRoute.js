@@ -67,6 +67,24 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+router.get("/get-all-users", authMiddleware, async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).send({
+      message: "Users fetched successfully",
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Error applying doctor account",
+      success: false,
+      error,
+    });
+  }
+});
+
 router.post("/get-user-data", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.body.userId);
@@ -79,6 +97,72 @@ router.post("/get-user-data", authMiddleware, async (req, res) => {
   } catch (error) {
     return res.status(500).send({ message: error.message, success: false });
   }
+});
+
+// router.post("/get-user-info-by-id", authMiddleware, async (req, res) => {
+//   try {
+//     const user = await User.findOne({ _id: req.body.userId });
+//     user.password = undefined;
+//     if (!user) {
+//       return res
+//         .status(200)
+//         .send({ message: "User does not exist", success: false });
+//     } else {
+//       res.status(200).send({
+//         success: true,
+//         data: user,
+//       });
+//     }
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .send({ message: "Error getting user info", success: false, error });
+//   }
+// });
+
+router.post("/get-user-by-id", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findOne({ userId: req.body.userId });
+    res.status(200).send({
+      success: true,
+      message: "User info fetched successfully",
+      data: user,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error getting user info", success: false, error });
+  }
+});
+
+
+router.post("/update-user-profile", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { userId: req.body.userId },
+      req.body
+    );
+    res.status(200).send({
+      success: true,
+      message: "User profile updated successfully",
+      data: user,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error getting user info", success: false, error });
+  }
+});
+
+router.post("/deleteuser", authMiddleware, async (req, res) => {
+  const userid = req.body.userid
+  try {
+    await User.findOneAndDelete({ _id: userid })
+    res.send('User Deleted Successfully')
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+
 });
 
 router.post("/send-reset-password-link", async (req, res) => {

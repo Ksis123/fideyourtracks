@@ -92,4 +92,16 @@ router.post("/edit-song", authMiddleware, upload.single("file"), async (req, res
 }
 );
 
+router.post("/deletesong", authMiddleware, async(req, res) => {
+  const trackid = req.body._id
+  try {
+      await Song.findOneAndDelete({_id : trackid})
+      res.send('Delete Track Successfully')
+  } catch (error) {
+      return res.status(400).json({ message: error });
+  }
+
+});
+
+
 module.exports = router;

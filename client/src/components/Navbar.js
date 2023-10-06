@@ -32,7 +32,7 @@ const Navbar = () => {
                     key: '1',
                     icon: <i className="fa-solid fa-user text-primary"></i>,
 
-                    onClick: () => navigate('/manage')
+                    onClick: () => navigate('/profile')
                 },
                 {
                     label: 'Download',
@@ -78,14 +78,14 @@ const Navbar = () => {
                 onClick={() => {
                     
                 }}>
-                <i className="fa-solid fa-wallet fa-lg"/> wallet
+                <i className="fa-solid fa-wallet fa-lg"/> NFT
             </button>
-            <button className="text-[#b7b5b5] hover:text-primary drop-shadow-lg"
+            {/* <button className="text-[#b7b5b5] hover:text-primary drop-shadow-lg"
                 onClick={() => {
                     navigate("/cart");
                 }}>
                 <i className="fa-solid fa-cart-shopping fa-xl"></i>
-            </button>
+            </button> */}
             <div className="flex items-center gap-5">
                 <div class="flex mr-16 text-[#eb6d2efd]">
                     <Dropdown className='rounded-full text-sm font-medium drop-shadow-lg' menu={menuProps}>

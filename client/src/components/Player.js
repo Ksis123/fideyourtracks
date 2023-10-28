@@ -80,7 +80,7 @@ function Player() {
           <div className="w-96">
             <h1 className="text-active text-2xl">{currentSong?.title}</h1>
             <h1 className="text-white">
-              {currentSong?.artist} - THB {currentSong?.price}
+              {currentSong?.artist} - {currentSong?.genre}
             </h1>
           </div>
         </div>

@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment-timezone'
 
 import "./AddEditSong.css"
 import Player from "../../components/Player";
 
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/alertsSlice";
+import {
+  SetAllSongs,
+} from "../../redux/userSlice";
+
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -14,15 +19,11 @@ function ManageHome() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-  const onDelete = async (name) => {
+  const onDelete = async (song) => {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "/api/user/deletesong",
-        {
-          name,
-        },
+        "/api/manage/delete-track", { trackId: song._id },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -31,7 +32,12 @@ function ManageHome() {
       );
       dispatch(HideLoading());
       if (response.data.success) {
-        toast.success("Tracks deleted successfully");
+        toast.success("Track deleted successfully");
+        dispatch(
+          SetAllSongs(
+            (response.data.data)
+          )
+        );
       } else {
         toast.error(response.data.message);
       }
@@ -41,10 +47,9 @@ function ManageHome() {
     }
   };
 
-
   useEffect(() => {
     if (user) {
-      if ((user?.isAdmin && !user.isAdmin) || !user?.isAdmin) {
+      if ((user?.isMember && !user.isMember) || !user?.isMember) {
         navigate("/");
       }
     }
@@ -53,11 +58,11 @@ function ManageHome() {
   return (
     <div>
       <div className="flex justify-between drop-shadow-lg">
-        <h1 className="text-3xl text-secondary">All Songs</h1>
+        <h1 className="text-3xl text-secondary">All Tracks</h1>
         <button
           className="summit-button"
           onClick={() => {
-            navigate("/manage/add-edit-song");
+            navigate("/manage/add-track");
           }}
         >
           Upload <i className="fa-solid fa-circle-right drop-shadow-lg" />
@@ -69,9 +74,8 @@ function ManageHome() {
             <th>Title</th>
             <th>Artist</th>
             <th>Genre</th>
-
-            <th>Price</th>
             <th>Duration</th>
+            <th>Release Date (D/M/Y : time)</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -79,29 +83,30 @@ function ManageHome() {
           {allSongs.map((song) => (
             <tr key={song.id}>
               <td>{song.title}</td>
-              <td>{song.artist}</td>
+              <td>{song.artist} <i className="fa-solid fa-user-shield  text-active"/></td>
               <td>{song.genre}</td>
-              <td>THB {song.price}</td>
               <td>{song.duration}</td>
+              <td>{moment(song.createdAt).tz("Asia/Bangkok").format('ddd, DD. MMMM YYYY HH:mm:ss')}</td>
               <td>
                 <button className="editback-button">
                   <i
                     className="fa-solid fa-pen"
                     onClick={() => {
-                      navigate("/manage/add-edit-song/?id=" + song._id);
+                      navigate("/manage/edit-track/?id=" + song._id);
                     }}
                   ></i>
                 </button>
                 <button className="delete-button">
-                  <i className="fa-solid fa-trash" onClick={(onDelete)}
-                  ></i>
+                  <i className="fa-solid fa-trash"
+                    onClick={() => onDelete(song)}
+                  />
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Player/>                
+      <Player />
     </div>
   );
 }

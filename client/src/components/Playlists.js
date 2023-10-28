@@ -29,7 +29,7 @@ function Playlists() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "/api/songs/delete-playlist",
+        "/api/tracks/delete-playlist",
         {
           name,
         },
@@ -91,7 +91,7 @@ function Playlists() {
               }}
             >
               <h1 className="text-xl">{playlist?.name}</h1>
-              <h1 className="text-sm">{playlist?.songs?.length} Songs</h1>
+              <h1 className="text-sm">{playlist?.songs?.length} Tracks</h1>
               <hr />
               <div className="flex gap-6 justify-between">
                 <i

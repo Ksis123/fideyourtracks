@@ -11,7 +11,6 @@ const MySwal = withReactContent(Swal)
 function ResetPasswordPage() {
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordResetSuccess, setPasswordResetSuccess] = useState(false);
   const params = useParams();
   const { token } = params;
@@ -87,18 +86,6 @@ function ResetPasswordPage() {
                       placeholder="Enter password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  <div className="passwordinput">
-                    <div className="passwordtext">
-                       Confirm Password
-                    </div>
-                    <input
-                      type="password"
-                      className="sigininput"
-                      placeholder="Enter confirm password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                   </div>
                   <div className="flex justify-between items-center">

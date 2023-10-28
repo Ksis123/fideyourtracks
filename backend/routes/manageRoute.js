@@ -3,7 +3,9 @@ const router = express.Router();
 const multer = require("multer");
 const authMiddleware = require("../middlewares/authMiddleware");
 const { cloudinary } = require("../cloudinary");
-const Song = require("../models/songModel");
+const Song = require("../models/trackModel");
+
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads/");
@@ -14,8 +16,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-router.post("/add-song", authMiddleware, upload.single("file"), async (req, res) => {
+router.post("/add-track", authMiddleware, upload.single("file"), async (req, res) => {
   try {
     cloudinary.v2.uploader.upload(
       req.file.path,
@@ -34,7 +35,6 @@ router.post("/add-song", authMiddleware, upload.single("file"), async (req, res)
             artist: req.body.artist,
             src: result.url,
             duration: req.body.duration,
-            price: req.body.price,
             genre: req.body.genre
           });
           await newsong.save();
@@ -49,7 +49,7 @@ router.post("/add-song", authMiddleware, upload.single("file"), async (req, res)
     );
   } catch (error) {
     res.status(500).send({
-      message: "Error adding song",
+      message: "Error adding track",
       success: false,
       data: error,
     });
@@ -57,7 +57,7 @@ router.post("/add-song", authMiddleware, upload.single("file"), async (req, res)
 }
 );
 
-router.post("/edit-song", authMiddleware, upload.single("file"), async (req, res) => {
+router.post("/edit-track", authMiddleware, upload.single("file"), async (req, res) => {
   try {
     let response = null;
     if (req.file) {
@@ -72,19 +72,18 @@ router.post("/edit-song", authMiddleware, upload.single("file"), async (req, res
       artist: req.body.artist,
       src: response ? response.url : req.body.src,
       duration: req.body.duration,
-      price: req.body.price,
       genre: req.body.genre,
 
     });
     const allSongs = await Song.find();
     res.status(200).send({
-      message: "Song edited successfully",
+      message: "Edited Track successfully",
       success: true,
       data: allSongs,
     });
   } catch (error) {
     res.status(500).send({
-      message: "Error adding song",
+      message: "Error adding track",
       success: false,
       data: error,
     });
@@ -92,13 +91,22 @@ router.post("/edit-song", authMiddleware, upload.single("file"), async (req, res
 }
 );
 
-router.post("/deletesong", authMiddleware, async(req, res) => {
-  const trackid = req.body._id
+router.post("/delete-track", authMiddleware, async (req, res) => {
   try {
-      await Song.findOneAndDelete({_id : trackid})
-      res.send('Delete Track Successfully')
+    await Song.findByIdAndDelete({ _id : req.body.trackId })
+
+    const allSongs = await Song.find();
+    res.status(200).send({
+      message: "Delete Track Successfully'",
+      success: true,
+      data: allSongs,
+    });
   } catch (error) {
-      return res.status(400).json({ message: error });
+    res.status(500).send({
+      message: "Error Delete Track",
+      success: false,
+      data: error,
+    });
   }
 
 });

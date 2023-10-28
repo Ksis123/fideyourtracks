@@ -34,7 +34,7 @@ function CreateEditPlaylist() {
       try {
         dispatch(ShowLoading());
         const response = await axios.post(
-          "/api/songs/add-playlist",
+          "/api/tracks/add-playlist",
           {
             name,
             songs: selectedSongs,
@@ -69,7 +69,7 @@ function CreateEditPlaylist() {
       try {
         dispatch(ShowLoading());
         const response = await axios.post(
-          "/api/songs/update-playlist",
+          "/api/tracks/update-playlist",
           {
             name,
             songs: selectedSongs,
@@ -162,7 +162,7 @@ function CreateEditPlaylist() {
               <div>
                 <h1>{song.title} </h1>
                 <h1>
-                  {song.artist} - THB {song.price} - {song.duration}
+                  {song.artist} - {song.genre} - {song.duration}
                 </h1>
               </div>
             </div>

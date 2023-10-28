@@ -3,19 +3,16 @@ const webapp = express();
 require("dotenv").config();
 const dbConfig = require("./config/dbConfig");
 const path = require("path");
-webapp.use(express.json());
 
-webapp.set("view engine", "ejs");
+webapp.use(express.json());
 webapp.use(express.urlencoded({ extended: false }));
 
-
-
 const userRoute = require("./routes/userRoute");
-const songsRoute = require("./routes/songsRoute");
+const tracksRoute = require("./routes/tracksRoute");
 const manageRoute = require("./routes/manageRoute");
 
 webapp.use("/api/users", userRoute);
-webapp.use("/api/songs", songsRoute);
+webapp.use("/api/tracks", tracksRoute);
 webapp.use("/api/manage", manageRoute);
 
 const port = process.env.PORT || 5000;

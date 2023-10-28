@@ -21,6 +21,7 @@
     "react-select": "^5.7.7",
     "react-spinners": "^0.13.8",
     "redux": "^4.2.0",
+    "moment-timezone": "^0.5.43",
     "sweetalert2": "^11.7.28",
     "sweetalert2-react-content": "^5.0.7",
     "web-vitals": "^2.1.4"

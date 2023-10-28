@@ -24,6 +24,18 @@
     background-size: 800px 600px;
 }
 
+.editsong-bg {
+    background-color: #ffffff4c;
+    /* #423d3df1 */
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    background-image: url(../../img/Lo-fi_page3.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 800px 600px;
+}
+
 .addsong-holder{
     width: 90vw;
     height: 70vh;
@@ -60,8 +72,8 @@
     border:none; 
     font-size: 20px;
     border-radius:20px;
-    background-color: #302f2e;
-    color:#ffffff;
+    background-color: #ffffff;
+    color:#424141;
     padding-left:10px;
     outline: none;
 }
@@ -81,15 +93,33 @@
     border-radius:20px;
 }
 
+.selectinput1{
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    height: 100%;
+    border:none; 
+    font-size: 20px;
+    border-radius:20px;
+    background-color: #ffffff;
+    color:#424141;
+    padding-left:10px;
+    outline: none;
+}
+
 .selectinput{
     font-family: 'Nunito', sans-serif;
     height: 100%;
     border:none; 
     font-size: 20px;
     border-radius:20px;
-    background-color: #302f2e;
-    color:#ffffff;
+    background-color: #ffffff;
+    color:#424141;
     padding-left:10px;
+}
+.selectgenre{
+    font-family: 'Nunito', sans-serif;
+    height: 100%;
+    font-size: 25px;
 }
 
 .emailtext{

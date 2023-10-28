@@ -17,7 +17,7 @@ function Signin() {
     email: "",
     password: "",
   });
-  
+
   const signin = async (e) => {
     e.preventDefault()
 
@@ -71,9 +71,13 @@ function Signin() {
                 <span className='stroke'></span>
               </div>
               <div className="welcome">
-
-                <h4> <i className="fa-solid fa-headphones-simple"></i> Fideyourtracks</h4>
-
+                <img
+                  className="lg:block h-10 w-auto"
+                  src="https://salmon-charming-stingray-66.mypinata.cloud/ipfs/Qmby9QDniPG7R8bE8XTJvon8KGFX7ZdKFGyYbiPCb5W4zn?_gl=1*1chzkqg*_ga*MTE0ODI0Mjc0LjE2OTY4NjQ2MTU.*_ga_5RMPXG14TE*MTY5ODIyNTk3My4zNy4xLjE2OTgyMjYwODcuMTAuMC4w"
+                />
+                <h4 className="text-3xl ml-2 p-1 font-bold drop-shadow-lg"> 
+                 <b className="text-primary hover:text-[#ff983d]">Fide</b><b className="text-secondary">yourtracks</b>
+                </h4>                
               </div>
               <div className="emailinput">
                 <div className="emailtext">

@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "651009d281a999a356a74f5a"
+  },
+  "name": "Ksis123",
+  "email": "khemkhemsiwa555@gmail.com",
+  "password": "$2a$10$3RxDhCnUKNs3sRArOGpkbuwvPTouhaFsnbQh/p7tqpNpTG2jwBbcy",
+  "playlists": [],
+  "isAdmin": true,
+  "createdAt": {
+    "$date": "2023-09-24T10:05:06.536Z"
+  },
+  "updatedAt": {
+    "$date": "2023-09-27T07:05:52.589Z"
+  },
+  "__v": 0
+}]

@@ -12,7 +12,6 @@ module.exports = async (savedUser, type) => {
     const savedToken = await newToken.save();
 
     emailContent = `
-    
     <h3>Password Reset</h3>
     <p>
         We received a request to reset your password. 
@@ -38,7 +37,7 @@ module.exports = async (savedUser, type) => {
     const mailOptions = {
       from: "b6311223@g.sut.ac.th",
       to: savedUser.email,
-      subject: "Verify your emai to reset password",
+      subject: "Verify your email to reset password",
       html: emailContent,
     };
     await transporter.sendMail(mailOptions);

@@ -35,15 +35,8 @@ const Navbar = () => {
                     onClick: () => navigate('/profile')
                 },
                 {
-                    label: 'Download',
-                    key: '2',
-                    icon: <i className="fa-solid fa-circle-down text-primary" />,
-
-                    onClick: () => navigate('/manage')
-                },
-                {
                     label: 'Sign-out',
-                    key: '4',
+                    key: '2',
                     icon: <i className="fa-solid fa-right-from-bracket text-primary" />,
                     onClick: () => signout()
                 },
@@ -74,18 +67,13 @@ const Navbar = () => {
             >
                 <i className="fa-solid fa-cloud-arrow-up text-2xl" /> Upload
             </button>
+
             <button className="upload-button drop-shadow-lg hover:text-primary"
                 onClick={() => {
-                    
+                    window.location.href = "http://localhost:3005/"
                 }}>
-                <i className="fa-solid fa-wallet fa-lg"/> NFT
+                <i className="fa-solid fa-wallet fa-lg" /> NFT
             </button>
-            {/* <button className="text-[#b7b5b5] hover:text-primary drop-shadow-lg"
-                onClick={() => {
-                    navigate("/cart");
-                }}>
-                <i className="fa-solid fa-cart-shopping fa-xl"></i>
-            </button> */}
             <div className="flex items-center gap-5">
                 <div class="flex mr-16 text-[#eb6d2efd]">
                     <Dropdown className='rounded-full text-sm font-medium drop-shadow-lg' menu={menuProps}>

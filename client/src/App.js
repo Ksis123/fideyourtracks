@@ -15,7 +15,8 @@ import { Toaster } from "react-hot-toast";
 import CreateEditPlaylist from "./pages/CreateEditPlaylist";
 import ManageHome from './pages/Manage/ManageHome';
 import AddEditSong from "./pages/Manage/AddEditSong";
-import Profile from './pages/Profile/Profile';
+import EditSong from './pages/Manage/EditSong';
+import Profile from './pages/Profile/index';
 function App() {
   const { loading } = useSelector((state) => state.alerts);
   return (
@@ -31,7 +32,9 @@ function App() {
           <Route path="/users/reset-password/:token" element={<PublicRoute> <ResetPasswordPage /></PublicRoute>} />
           <Route path="/create-edit-playlist" element={<ProtectedRoute><CreateEditPlaylist /></ProtectedRoute>} />
           <Route path="/manage" element={<ProtectedRoute><ManageHome /></ProtectedRoute>} />
-          <Route path="/manage/add-edit-song" element={<ProtectedRoute><AddEditSong /></ProtectedRoute>} />
+          <Route path="/manage/add-track" element={<ProtectedRoute><AddEditSong /></ProtectedRoute>} />
+          <Route path="/manage/edit-track" element={<ProtectedRoute><EditSong /></ProtectedRoute>} />
+
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
           <Route path="/cart" element={<ProtectedRoute><Card /></ProtectedRoute>} />

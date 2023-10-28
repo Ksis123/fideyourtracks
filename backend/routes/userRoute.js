@@ -16,7 +16,7 @@ router.post("/signup", async (req, res) => {
     const user = new User(req.body);
     const existingUser = await User.findOne({ email: req.body.email });
     const oldname = await User.findOne({ name: req.body.name });
-    if (req.body.name.length < 3) {
+    if (req.body.name.length < 4) {
       return res.status(200).json({ message: "Username must be more 3 characters" });
     }
     if (oldname) {
@@ -67,24 +67,6 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-router.get("/get-all-users", authMiddleware, async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.status(200).send({
-      message: "Users fetched successfully",
-      success: true,
-      data: users,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      message: "Error applying doctor account",
-      success: false,
-      error,
-    });
-  }
-});
-
 router.post("/get-user-data", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.body.userId);
@@ -99,58 +81,47 @@ router.post("/get-user-data", authMiddleware, async (req, res) => {
   }
 });
 
-// router.post("/get-user-info-by-id", authMiddleware, async (req, res) => {
-//   try {
-//     const user = await User.findOne({ _id: req.body.userId });
-//     user.password = undefined;
-//     if (!user) {
-//       return res
-//         .status(200)
-//         .send({ message: "User does not exist", success: false });
-//     } else {
-//       res.status(200).send({
-//         success: true,
-//         data: user,
-//       });
-//     }
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .send({ message: "Error getting user info", success: false, error });
-//   }
-// });
 
-router.post("/get-user-by-id", authMiddleware, async (req, res) => {
+
+//----------------------Profile-----------------------------------------------
+// Get current user (protected)
+router.get("/get-current-user", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findOne({ userId: req.body.userId });
-    res.status(200).send({
+    const user = await User.findById(req.userId).select("-password");
+    res.status(200).json({
+      message: "User fetched successfully",
       success: true,
-      message: "User info fetched successfully",
       data: user,
     });
   } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Error getting user info", success: false, error });
+    res.status(500).json({ message: error.message, success: false });
   }
 });
 
-
-router.post("/update-user-profile", authMiddleware, async (req, res) => {
+router.put("/update-user", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findOneAndUpdate(
-      { userId: req.body.userId },
-      req.body
-    );
-    res.status(200).send({
+    if (req.body.newPassword && req.body.oldPassword) {
+      const oldPassword = req.body.oldPassword;
+      const user = await User.findById(req.body._id);
+      const isPasswordCorrect = await bcrypt.compare(
+        oldPassword,
+        user.password
+      );
+      if (!isPasswordCorrect) throw new Error("The old password is incorrect");
+
+      const newPassword = await bcrypt.hash(req.body.newPassword, 10);
+      req.body.password = newPassword;
+    }
+    const updatedUser = await User.findByIdAndUpdate(req.body._id, req.body, {
+      new: true,
+    }).select("-password");
+    res.status(200).json({
+      message: "User updated successfully",
       success: true,
-      message: "User profile updated successfully",
-      data: user,
+      data: updatedUser,
     });
   } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Error getting user info", success: false, error });
+    res.status(500).json({ message: error.message, success: false });
   }
 });
 
@@ -208,7 +179,9 @@ router.post("/verify-reset-password-token", async (req, res) => {
 
 router.post("/reset-password", async (req, res) => {
   try {
-    let { token, password } = req.body;
+    let { token } = req.body;
+    const password = req.body.password;
+
     const tokenObj = await Token.findOne({ token });
     if (!tokenObj) {
       return res
@@ -217,10 +190,17 @@ router.post("/reset-password", async (req, res) => {
     }
     const user = await User.findOne({ _id: tokenObj.userId.toString() });
     const salt = await bcrypt.genSalt(10);
-    password = await bcrypt.hash(password, salt);
-    user.password = password;
+    hashedPassword = await bcrypt.hash(password, salt);
+    user.password = hashedPassword;
+
+    if (password.length < 6 || password.length > 12) {
+      return res.status(200).json({ message: "Password must be 6-12 characters" });
+    }
+
     await user.save();
+    
     await Token.findOneAndDelete({ token });
+
     res
       .status(200)
       .json({ message: "Password reset successfully", success: true });

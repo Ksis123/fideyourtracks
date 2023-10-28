@@ -49,7 +49,7 @@ function ProtectedRoute({ children }) {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "/api/songs/get-all-songs",
+        "/api/tracks/get-all-tracks",
         {},
         {
           headers: {

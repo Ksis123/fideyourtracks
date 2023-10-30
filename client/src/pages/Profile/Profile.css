@@ -54,18 +54,18 @@
     backdrop-filter: blur(0.25px);
     align-items:left;
     padding-left: 150px;
-    padding-top: 20px;
+    padding-top: 80px;
 
 }
 
 .profile-div{
     background-color:#cdcac9;
     height:560px;
-    width: 560px;
+    width: 600px;
     border-radius: 40px;
     background: transparent;
     backdrop-filter: blur(0.25px);
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 6px 24px #26242180;
@@ -89,7 +89,20 @@
 
 .promailinput{
     font-family: 'Nunito', sans-serif;
-    width: 150px;
+    width: 250px;
+    height: 45px;
+    border:none; 
+    font-size: 15px;
+    border-radius:20px;
+    background-color: #b8b5b350;
+    padding-left:10px;
+    box-shadow: 0 6px 24px #49474780;
+    outline: none;
+}
+
+.usernameinput{
+    font-family: 'Nunito', sans-serif;
+    width: 200px;
     height: 45px;
     border:none; 
     font-size: 18px;
@@ -100,26 +113,13 @@
     outline: none;
 }
 
-.usernameinput{
-    font-family: 'Nunito', sans-serif;
-    width: 250px;
-    height: 45px;
-    border:none; 
-    font-size: 15px;
-    border-radius:20px;
-    background-color: #e9e7e58b;
-    padding-left:10px;
-    box-shadow: 0 6px 24px #49474780;
-    outline: none;
-}
-
-
-
 
 .profile-form {
     padding-left: 50px; 
     width: 600px;
     margin-top: 50px;
+    margin-left: 50px;
+
     backdrop-filter: blur(25px);
     box-shadow: 0 6px 24px #1c120880;
     border-radius:20px;

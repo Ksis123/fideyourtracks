@@ -82,10 +82,10 @@ function UserDetails() {
             >
               <div className="gap-5 flex">
                 <Form.Item className=" text-active " label="User Name" name="name" rules={antValidationError}>
-                  <input className="promailinput" disabled />
+                  <input className="usernameinput" disabled />
                 </Form.Item>
                 <Form.Item className=" text-[#ffffff]" label="Email" name="email" rules={antValidationError}>
-                  <input className="usernameinput" disabled />
+                  <input className="promailinput" disabled />
                 </Form.Item>
               </div>
 

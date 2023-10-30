@@ -8,6 +8,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { SetAllSongs } from "../../redux/userSlice";
+import Player from "../../components/Player";
 
 function AddEditSong() {
   const { allSongs, user } = useSelector((state) => state.user);
@@ -206,7 +207,9 @@ function AddEditSong() {
 
         </div>
       </div>
+      <Player/>
     </div>
+  
   );
 }
 

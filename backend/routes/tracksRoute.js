@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const Song = require("../models/trackModel");
+const Track = require("../models/trackModel");
 const User = require("../models/userModel");
 
 router.post("/get-all-tracks", authMiddleware, async (req, res) => {
   try {
-    const songs = await Song.find();
+    const songs = await Track.find();
     res.status(200).send({
       message: "Tracks fetched successfully",
       success: true,

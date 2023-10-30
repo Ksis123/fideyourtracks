@@ -68,46 +68,49 @@ function ManageHome() {
           Upload <i className="fa-solid fa-circle-right drop-shadow-lg" />
         </button>
       </div>
-      <table className="w-full mt-5 bg-[#161414e0] drop-shadow-lg text-left">
-        <thead className="w-full">
-          <tr>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Genre</th>
-            <th>Duration</th>
-            <th>Release Date (D/M/Y : time)</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody className="text-secondary">
-          {allSongs.map((song) => (
-            <tr key={song.id}>
-              <td>{song.title}</td>
-              <td>
-                <h6><a>By </a> <b className="text-active">  <i class="fa-solid fa-user-shield" /> {song.artist}</b></h6>
-              </td>
-              <td>{song.genre}</td>
-              <td>{song.duration} </td>
-              <td>{moment(song.createdAt).tz("Asia/Bangkok").format('ddd, DD. MMMM YYYY HH:mm:ss')}</td>
-              <td>
-                <button className="editback-button">
-                  <i
-                    className="fa-solid fa-pen"
-                    onClick={() => {
-                      navigate("/manage/edit-track/?id=" + song._id);
-                    }}
-                  ></i>
-                </button>
-                <button className="delete-button">
-                  <i className="fa-solid fa-trash"
-                    onClick={() => onDelete(song)}
-                  />
-                </button>
-              </td>
+      <br/>
+      <div className="overflow-y-scroll h-96">
+        <table className="w-full mt-5 bg-[#161414e0] drop-shadow-lg text-left">
+          <thead className="w-full ">
+            <tr>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Genre</th>
+              <th>Duration</th>
+              <th>Release Date (D/M/Y : time)</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className=" text-secondary">
+            {allSongs.map((song) => (
+              <tr key={song.id}>
+                <td>{song.title}</td>
+                <td>
+                  <h6><a>By </a> <b className="text-active">  <i class="fa-solid fa-user-shield" /> {song.artist}</b></h6>
+                </td>
+                <td>{song.genre}</td>
+                <td>{song.duration} </td>
+                <td>{moment(song.createdAt).tz("Asia/Bangkok").format('ddd, DD. MMMM YYYY HH:mm:ss')}</td>
+                <td>
+                  <button className="editback-button">
+                    <i
+                      className="fa-solid fa-pen"
+                      onClick={() => {
+                        navigate("/manage/edit-track/?id=" + song._id);
+                      }}
+                    ></i>
+                  </button>
+                  <button className="delete-button">
+                    <i className="fa-solid fa-trash"
+                      onClick={() => onDelete(song)}
+                    />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Player />
     </div>
   );

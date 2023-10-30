@@ -35,9 +35,14 @@ const Navbar = () => {
                     onClick: () => navigate('/profile')
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     label: 'Sign-out',
                     key: '2',
-                    icon: <i className="fa-solid fa-right-from-bracket text-primary" />,
+                    
+                    danger: true,
+                    icon: <i className="fa-solid fa-right-from-bracket text-active hover:text-secondary" />,
                     onClick: () => signout()
                 },
             ];

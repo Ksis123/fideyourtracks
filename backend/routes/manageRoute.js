@@ -15,7 +15,21 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const fileFilter = (req, file, cb) => {
+  // AudioOnly .MP3 or .WAV
+  if (!file.originalname.match(/\.(mp3|wav)$/)) {
+    return cb(new Error('Only Audio files To Upload track!'), false)
+  }
+  cb(null, true)
+}
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: fileFilter 
+
+});
+
+
 router.post("/add-track", authMiddleware, upload.single("file"), async (req, res) => {
   try {
     cloudinary.v2.uploader.upload(

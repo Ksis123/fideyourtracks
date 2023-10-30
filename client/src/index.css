@@ -32,7 +32,6 @@ i{
 
 }
 
-
 thead{
     background-image: linear-gradient(225deg, #0c0c0cda 10%, #0c0c0cda 50%, #0c0c0cda 100%);       
     opacity: 60;
@@ -53,9 +52,14 @@ tr{
     
 }
 
+
 input[type='file']{
     border: none !important;
 }
 .sc-bczRLJ{
     border: none !important;
 }
+
+
+
+

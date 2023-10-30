@@ -7,6 +7,7 @@ const sendEmail = require("../utils/sendEmail");
 const Token = require("../models/tokenModel");
 const authMiddleware = require("../middlewares/authMiddleware");
 
+// ------------------------ Sign-Up ----------------------------
 router.post("/signup", async (req, res) => {
   try {
     const password = req.body.password;
@@ -36,6 +37,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+// ------------------------ Sign-In  ----------------------------
 router.post("/signin", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -67,6 +69,7 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+// ------------------------ GET User ----------------------------
 router.post("/get-user-data", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.body.userId);
@@ -82,9 +85,7 @@ router.post("/get-user-data", authMiddleware, async (req, res) => {
 });
 
 
-
 //----------------------Profile-----------------------------------------------
-// Get current user (protected)
 router.get("/get-current-user", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password");
@@ -100,18 +101,29 @@ router.get("/get-current-user", authMiddleware, async (req, res) => {
 
 router.put("/update-user", authMiddleware, async (req, res) => {
   try {
+
     if (req.body.newPassword && req.body.oldPassword) {
       const oldPassword = req.body.oldPassword;
       const user = await User.findById(req.body._id);
+
+
       const isPasswordCorrect = await bcrypt.compare(
         oldPassword,
         user.password
       );
+
       if (!isPasswordCorrect) throw new Error("The old password is incorrect");
 
       const newPassword = await bcrypt.hash(req.body.newPassword, 10);
       req.body.password = newPassword;
     }
+
+    if (req.body.newEmail) {
+      const existingUser = await User.findOne({ email: req.body.email });
+      
+      if (existingUser) throw new Error("E-mail already exists");
+    }
+
     const updatedUser = await User.findByIdAndUpdate(req.body._id, req.body, {
       new: true,
     }).select("-password");
@@ -136,6 +148,8 @@ router.post("/deleteuser", authMiddleware, async (req, res) => {
 
 });
 
+
+// ------------------------ Reset-Password  ----------------------------
 router.post("/send-reset-password-link", async (req, res) => {
   try {
     const { email } = req.body;
@@ -209,4 +223,5 @@ router.post("/reset-password", async (req, res) => {
     console.log(error);
   }
 });
+
 module.exports = router;

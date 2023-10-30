@@ -75,11 +75,11 @@ function UserDetails() {
                 email: user.email,
               }}
             >
-              <Form.Item className=" text-primary font-bold" label="Name" name="name" rules={antValidationError}>
-                <input className="profileinput" />
+              <Form.Item className=" text-primary " label="Name" name="name" rules={antValidationError}>
+                <input className="usernameinput" disabled />
               </Form.Item>
               <Form.Item className=" text-active" label="Email" name="email" rules={antValidationError}>
-                <input className="proemail" disabled />
+                <input className="promailinput"  disabled />
               </Form.Item>
               <Form.Item
                 className=""

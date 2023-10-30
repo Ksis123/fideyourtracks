@@ -26,7 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(225deg, #f9f0e2 10%, #e8e2e242 50%, #86401466 100%);       
+    background-image: linear-gradient(225deg, #f9f0e2 10%, #e8e2e2a5 50%, #9b623f66 100%);       
     background-position: center;
     background-repeat: no-repeat;
     background-size: 1650px 580px;
@@ -42,9 +42,8 @@
     backdrop-filter: blur(15px);
     background-image: url(../../img/Lo-fi_page3.svg);
     background-repeat: no-repeat;
-    background-position: left;
-    background-size: 860px 660px;
-    padding-left: 15px;
+    background-position: right;
+    background-size: 860px 860px;
 }
 
 .profile-holder{
@@ -54,11 +53,10 @@
     background: transparent;
     backdrop-filter: blur(0.25px);
     display: flex;
-    justify-content:left;
-    align-items:center;
-    padding-left: 50px;
+    align-items:left;
+    padding-left: 150px;
     padding-top: 20px;
-    justify-content: right;
+    justify-content: left;
 
 }
 
@@ -83,16 +81,16 @@
     width: 100%;
     height: 100%;
     border:none; 
-    font-size: 20px;
+    font-size: 18px;
     border-radius:20px;
-    background-color: #3425255f;
-    color:rgb(255, 254, 253);
+    background-color: #ffffffd3;
+    color:rgb(74, 70, 65);
     box-shadow: 0 6px 24px #534a3d80;
     padding-left:10px;
     outline: none;
 }
 
-.proemail{
+.promailinput{
     font-family: 'Nunito', sans-serif;
     width: 100%;
     height: 100%;
@@ -102,5 +100,18 @@
     background-color: #0e03037e;
     padding-left:10px;
     box-shadow: 0 6px 24px #a8561880;
+    outline: none;
+}
+
+.usernameinput{
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    height: 100%;
+    border:none; 
+    font-size: 20px;
+    border-radius:20px;
+    background-color: #e9e7e58b;
+    padding-left:10px;
+    box-shadow: 0 6px 24px #49474780;
     outline: none;
 }

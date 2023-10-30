@@ -63,7 +63,7 @@ function SongsList() {
         <div className="w-1/2 pl-[12rem]"><h1>Title</h1></div>
         <div className="w-1/2 pl-[22rem]"><h1>Artist</h1></div>
         <div className="w-1/2 pl-[22rem]"><h1>Genre</h1></div>
-        <div className="w-1/2 pl-[10rem]"><i class="far fa-clock" /></div>
+        <div className="w-1/2 pl-[10rem]"><i className="far fa-clock" /></div>
       </div>
       < hr />
       <div className="overflow-y-scroll h-[54vh] p-3">

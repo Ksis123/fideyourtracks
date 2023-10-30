@@ -68,7 +68,7 @@ function ManageHome() {
           Upload <i className="fa-solid fa-circle-right drop-shadow-lg" />
         </button>
       </div>
-      <table className="w-full mt-5 bg-[#161414e0] drop-shadow-lg">
+      <table className="w-full mt-5 bg-[#161414e0] drop-shadow-lg text-left">
         <thead className="w-full">
           <tr>
             <th>Title</th>
@@ -83,9 +83,11 @@ function ManageHome() {
           {allSongs.map((song) => (
             <tr key={song.id}>
               <td>{song.title}</td>
-              <td>{song.artist} <i className="fa-solid fa-user-shield  text-active"/></td>
+              <td>
+                <h6><a>By </a> <b className="text-active">  <i class="fa-solid fa-user-shield" /> {song.artist}</b></h6>
+              </td>
               <td>{song.genre}</td>
-              <td>{song.duration}</td>
+              <td>{song.duration} </td>
               <td>{moment(song.createdAt).tz("Asia/Bangkok").format('ddd, DD. MMMM YYYY HH:mm:ss')}</td>
               <td>
                 <button className="editback-button">

@@ -69,18 +69,16 @@ function ManageHome() {
         </button>
       </div>
       <br/>
-      <div className="overflow-y-scroll h-96">
-        <table className="w-full mt-5 bg-[#161414e0] drop-shadow-lg text-left">
-          <thead className="w-full ">
-            <tr>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Genre</th>
-              <th>Duration</th>
-              <th>Release Date (D/M/Y : time)</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+      <div className="top flex cursor-pointer text-[#ff9603da] text-left font-bold">
+        <div className="w-[24vw]"><h1>Title</h1></div>
+        <div className="w-[20vw]"><h1>Artist</h1></div>
+        <div className="w-[7vw]"><h1>Genre</h1></div>
+        <div className="w-[6vw]"><h1>Durtation</h1></div>
+        <div className="w-[28.5vw]"><h1>Release Date</h1></div>
+        <div className=""><h1>Actions</h1></div>
+      </div>
+      <div className="overflow-y-scroll h-[54vh]">
+        <table className="w-full  bg-[#161414e0] drop-shadow-lg text-left">
           <tbody className=" text-secondary">
             {allSongs.map((song) => (
               <tr key={song.id}>
@@ -90,7 +88,7 @@ function ManageHome() {
                 </td>
                 <td>{song.genre}</td>
                 <td>{song.duration} </td>
-                <td>{moment(song.createdAt).tz("Asia/Bangkok").format('ddd, DD. MMMM YYYY HH:mm:ss')}</td>
+                <td>{moment(song.updatedAt).tz("Asia/Bangkok").format('ddd, DD. MMMM YYYY HH:mm:ss')}</td>
                 <td>
                   <button className="editback-button">
                     <i

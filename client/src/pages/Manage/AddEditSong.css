@@ -132,6 +132,14 @@
     color:#dededd
 }
 
+.label{
+    font-size:15px;
+    position: absolute;
+    top:-25px;
+    left:10px;
+    color:#dededd
+}
+
 .email{
     height: 100%; 
     top:0px;
@@ -245,4 +253,24 @@
 }
 
 
+.top{
+    background-image: linear-gradient(225deg, #633411f6 10%, #683711f6 50%, #62330ff6 100%);       
+    opacity: 40;
+    padding: 12px !important;
+    font-size: 18px;
+}
 
+
+.manageinput{
+    font-family: 'Nunito', sans-serif;
+    width: 200px;
+    height: 40px;
+    border:none; 
+    font-size: 18px;
+    border-radius:20px;
+    background-color: #ffffff;
+    color:rgb(74, 70, 65);
+    box-shadow: 0 6px 24px #534a3d80;
+    padding-left:10px;
+    outline: none;
+}

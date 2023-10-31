@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 function DefaultLayout({ children }) {
 
     return (
-        <div className="main them ">
+        <div className="main them">
             <div className='bg-[#1b1919f3] drop-shadow-2xl'>
                 <Navbar />
             </div>

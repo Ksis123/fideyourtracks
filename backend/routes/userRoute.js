@@ -211,6 +211,8 @@ router.post("/reset-password", async (req, res) => {
       return res.status(200).json({ message: "Password must be 6-12 characters" });
     }
 
+    
+
     await user.save();
     
     await Token.findOneAndDelete({ token });

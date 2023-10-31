@@ -41,7 +41,7 @@ function SongsList() {
 
   return (
     <div className="flex flex-col drop-shadow-lg text-secondary">
-      <div className="pr-[20rem] flex w-1/2 p-2">
+      <div className="pr-[20rem] flex w-[40vw] p-2">
         <input
           className=" bg-[#302c2cc9] appearance-none border rounded w-[350px]  text-secondary leading-tight focus:outline-none focus:shadow-outline"
           type="text"
@@ -57,13 +57,13 @@ function SongsList() {
           value={searchKey}
           onChange={(e) => setSearchKey(e.target.value)}
         />
-        <h1><i className="fas fa-search text-[#ffffff87] hover:text-[#ffffff] transition ease-in-out delay-90" style={{ marginLeft: "-45px", marginTop: "10px" }}></i></h1>
+        <h1><i className="fas fa-search text-[#ffffff87] hover:text-[#ffffff] transition ease-in-out delay-90" style={{ marginLeft: "10px", marginTop: "10px" }}></i></h1>
       </div>
       <div className="flex cursor-pointer text-[#ff724a] font-semibold">
-        <div className="w-1/2 pl-[12rem]"><h1>Title</h1></div>
-        <div className="w-1/2 pl-[22rem]"><h1>Artist</h1></div>
-        <div className="w-1/2 pl-[22rem]"><h1>Genre</h1></div>
-        <div className="w-1/2 pl-[10rem]"><i className="far fa-clock" /></div>
+        <div className="w-[20vw]"><h1>Title</h1></div>
+        <div className="w-[11vw]"><h1>Artist</h1></div>
+        <div className="w-[21vw]"><h1>Genre</h1></div>
+        <div className=""><i className="far fa-clock" /></div>
       </div>
       < hr />
       <div className="overflow-y-scroll h-[54vh] p-3">

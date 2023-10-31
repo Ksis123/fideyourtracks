@@ -45,7 +45,7 @@ function Signup() {
     } catch (error) {
       MySwal.fire({
         title: <strong>Please enter Value Form</strong>,
-        html: 'Please enter valid value',
+        html: 'form invalid value',
         icon: 'error'
       })
       dispatch(HideLoading());

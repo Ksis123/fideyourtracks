@@ -75,7 +75,7 @@ input[type='file'] {
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(#DF554F, #F49B4E);
-    box-shadow: 0 6px 24px #806d5e34;
+    box-shadow: 0 6px 24px rgba(217, 135, 73, 0.412);
     border-radius: 15px;
 }
 

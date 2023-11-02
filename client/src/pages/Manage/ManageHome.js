@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment-timezone'
 
@@ -18,6 +18,8 @@ function ManageHome() {
   const { allSongs, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [showButton, setShowButton] = useState(false);
 
   const onDelete = async (song) => {
     try {
@@ -55,6 +57,8 @@ function ManageHome() {
     }
   }, [user]);
 
+
+
   return (
     <div>
       <div className="flex justify-between drop-shadow-lg">
@@ -70,18 +74,50 @@ function ManageHome() {
       </div>
       <br/>
       <div className="top flex cursor-pointer text-[#ff9603da] text-left font-bold">
-        <div className="w-[24vw]"><h1>Title</h1></div>
-        <div className="w-[20vw]"><h1>Artist</h1></div>
-        <div className="w-[7vw]"><h1>Genre</h1></div>
-        <div className="w-[6vw]"><h1>Durtation</h1></div>
+        <div className="w-[22.5vw]"><h1>Title</h1></div>
+        <div className="w-[18vw]"><h1>Artist</h1></div>
+        <div className="w-[12vw]"><h1>Genre</h1></div>
+        <div className="w-[7vw]"><h1>Durtation</h1></div>
         <div className="w-[28.5vw]"><h1>Release Date</h1></div>
         <div className=""><h1>Actions</h1></div>
       </div>
       <div className="overflow-y-scroll h-[54vh]">
         <table className="w-full  bg-[#161414e0] drop-shadow-lg text-left">
           <tbody className=" text-secondary">
+            {allSongs.map((song) => 
+
+            ( 
+              <tr key={song}>
+              <td>{song.title}</td>
+              <td>
+                <h6><a>By </a> <b className="text-active">  <i class="fa-solid fa-user-shield" /> {song.artist}</b></h6>
+              </td>
+              <td>{song.genre}</td>
+              <td>{song.duration} </td>
+              <td>{moment(song.updatedAt).tz("Asia/Bangkok").format('ddd, DD. MMMM YYYY HH:mm:ss')}</td>
+              <td>
+                <button className="editback-button">
+                  <i
+                    className="fa-solid fa-pen"
+                    onClick={() => {
+                      navigate("/manage/edit-track/?id=" + song._id);
+                    }}
+                  ></i>
+                </button>
+                <button className="delete-button">
+                  <i className="fa-solid fa-trash"
+                    onClick={() => onDelete(song)}
+                  />
+                </button>
+              </td>
+            </tr>
+            ))}
+          </tbody>
+          
+          
+          {/* <tbody >
             {allSongs.map((song) => (
-              <tr key={song.id}>
+              <tr key={song.artist}>
                 <td>{song.title}</td>
                 <td>
                   <h6><a>By </a> <b className="text-active">  <i class="fa-solid fa-user-shield" /> {song.artist}</b></h6>
@@ -106,7 +142,7 @@ function ManageHome() {
                 </td>
               </tr>
             ))}
-          </tbody>
+          </tbody> */}
         </table>
       </div>
       <Player />

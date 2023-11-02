@@ -98,13 +98,13 @@ function Player() {
               <i class="fa-solid fa-backward-step text-4xl drop-shadow-2xl" onClick={onPrev}></i>
             </div>
             {isPlaying ? (
-              <div className="text-[#ff6e35] hover:text-[#ff6532] transition ease-in-out delay-50 hover:scale-110 opacity-80 ">
+              <div className="play text-[#ff6e35] hover:text-[#ff6532] transition ease-in-out delay-50 hover:scale-110 opacity-80 ">
                 <i className="fa-solid fa-circle-pause fa-2xl text-6xl drop-shadow-2xl" 
                 onClick={onPause}>
                 </i>
               </div>
             ) : (
-              <div className="text-[#ff6d38c9] hover:text-[#ff6532] transition ease-in-out delay-50 hover:scale-110 opacity-80">
+              <div className="play text-[#ff6d38c9] hover:text-[#ff6532] transition ease-in-out delay-50 hover:scale-110 opacity-80">
                 <i className="fa-solid fa-circle-play fa-2xl text-6xl shadow-lg  drop-shadow-2xl " 
                 onClick={onPlay}>
 
@@ -115,7 +115,7 @@ function Player() {
               <i className="fa-solid fa-forward-step fa-xl text-4xl drop-shadow-2xl" onClick={onNext}></i>
             </div>
           </div>
-          <div className="flex gap-3 items-center w-full">
+          <div className="flex gap-3 items-center w-full slidecontainer">
             <i
               className={`ri-shuffle-line text-xl text-white ${shuffleOn && "text-white font-semibold"
                 }`}
@@ -128,7 +128,7 @@ function Player() {
             </h1>
             <input
               type="range"
-              className="p-0 w-full bg-gray-200"
+              className="p-0 w-full slider "
               min={0}
               max={Number(currentSong?.duration) * 60}
               value={currentTime}
@@ -151,7 +151,7 @@ function Player() {
           ></i>
           <input
             type="range"
-            className="p-0"
+            className="p-0 slider"
             min={0}
             max={1}
             step={0.1}
@@ -164,7 +164,7 @@ function Player() {
           <i
             className="ri-volume-down-line text-3xl text-[#bda599c2] hover:text-white"
             onClick={() => {
-              setVolume(1);
+              setVolume(100);
               audioRef.current.volume = 1;
             }}
           ></i>

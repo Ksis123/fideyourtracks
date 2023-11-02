@@ -4,11 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     font-family: 'Nunito', sans-serif;
 }
 
-input{
+input {
     height: 40px;
     border: 2px solid rgba(128, 128, 128, 0.716);
     padding: 10px 15px;
@@ -16,51 +16,202 @@ input{
 
 }
 
-input:focus{
+input:focus {
     border: 2px solid rgb(249, 215, 190) !important;
-    
+
 }
 
-.primary{
+.primary {
     color: #ffffff;
-    border:none !important;
+    border: none !important;
     padding: 7px 0;
 }
 
-i{
+i {
     cursor: pointer;
     border-radius: 30px;
 
 }
 
-thead{
-    background-image: linear-gradient(225deg, #0c0c0cda 10%, #0c0c0cda 50%, #0c0c0cda 100%);       
+thead {
+    background-image: linear-gradient(225deg, #494545da 10%, #0c0c0cda 50%, #0c0c0cda 100%);
     opacity: 60;
     padding: 10px !important;
     color: #ff9603da
 }
-th{
+
+th {
     padding: 10px !important;
     text-align: left !important;
-    
+
 }
-td{
+
+td {
     padding: 10px !important;
-    
+
 }
-tr{
+
+tr {
     border-bottom: 4px solid #9d582034;
-    
+
 }
 
 
-input[type='file']{
-    border: none !important;
-}
-.sc-bczRLJ{
+input[type='file'] {
     border: none !important;
 }
 
+.sc-bczRLJ {
+    border: none !important;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #16141471
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#DF554F, #F49B4E);
+    box-shadow: 0 6px 24px #806d5e34;
+    border-radius: 15px;
+}
 
 
+.slidecontainer {
+    width: 100%;
+}
 
+.slider {
+    -webkit-appearance: none;
+    height: 12px;
+    border-radius: 15px;
+    background: #222121;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    background: linear-gradient(#ff5338, #F49B4E);
+    box-shadow: 0 6px 24px rgba(208, 111, 37, 0.416);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #ff6d38;
+    cursor: pointer;
+}
+
+
+input[type="range"] {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 22px;
+        width: 22px;
+        border-radius: 60%;
+        background: linear-gradient(#ff5338, #F49B4E);
+        margin-top: -5px;
+        box-shadow: 0 6px 32px rgba(217, 135, 73, 0.915);
+
+        cursor: pointer;
+
+    }
+
+    &::-webkit-slider-runnable-track {
+        width: 60%;
+        height: 9px;
+        background: #171717;
+        border-radius: 3rem;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
+    &:hover::-webkit-slider-runnable-track {
+        background: #f6e1da;
+        
+    }
+
+
+    &::-ms-track {
+        width: 60%;
+        cursor: pointer;
+        height: 9px;
+
+        transition: all 0.5s;
+        /* Hides the slider so custom styles can be added */
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+    }
+
+    &::-ms-thumb {
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        margin-top: -5px;
+        box-shadow: 1px 1px 2px rgba(#000, 0.5);
+
+        cursor: pointer;
+    }
+
+    &::-ms-fill-lower {
+        border-radius: 3rem;
+    }
+
+    &:focus::-ms-fill-lower {
+        background: #ff6e40;
+    }
+
+    &::-ms-fill-upper {
+        background: #bdbdbd;
+        border-radius: 3rem;
+    }
+
+    &:focus::-ms-fill-upper {
+        background: #ff6e40;
+    }
+
+    &::-moz-range-thumb {
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: #ffffff;
+        margin-top: -5px;
+        box-shadow: 1px 1px 2px rgba(#000, 0.5);
+
+        cursor: pointer;
+    }
+
+    &::-moz-range-track {
+        width: 60%;
+        height: 9px;
+        background: #bdbdbd;
+        border-radius: 3rem;
+
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
+    &:hover::-moz-range-track {
+        background: #ff6e40;
+    }
+}

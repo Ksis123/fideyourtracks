@@ -12,14 +12,26 @@ module.exports = async (savedUser, type) => {
     const savedToken = await newToken.save();
 
     emailContent = `
+    <div style="text-align: center;">
+      <img src='https://salmon-charming-stingray-66.mypinata.cloud/ipfs/Qmby9QDniPG7R8bE8XTJvon8KGFX7ZdKFGyYbiPCb5W4zn?_gl=1*1dsog9a*_ga*MTE0ODI0Mjc0LjE2OTY4NjQ2MTU.*_ga_5RMPXG14TE*MTY5ODkyMTgyMS40NS4xLjE2OTg5MjE4NTAuMzEuMC4w' width="300" height="300">
+      </img>
+    <div/>
     <h3>Password Reset</h3>
     <p>
-        We received a request to reset your password. 
-        If you did not make this request, please ignore this email.
+        Your account has been resetpassword link now to visit our website,
+        
     </p>
-    <a href="http://localhost:3000/users/reset-password/${savedToken.token}">
-    Click here to reset Your Password
+    <p>
+        If you did not make this request, please ignore this email
+    </p>
+    following URL
+    <a href="http://localhost:3005/users/reset-password/${savedToken.token}">
+        Click here to reset Your Password
     </a>
+    <div style="text-align: left;">
+      <p>Your Welcome,</p>
+      <span>Fideyourtracks</span>
+    <div/>
   `;
 
 

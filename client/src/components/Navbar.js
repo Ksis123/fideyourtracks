@@ -40,7 +40,6 @@ const Navbar = () => {
                 {
                     label: 'Sign-out',
                     key: '2',
-                    
                     danger: true,
                     icon: <i className="fa-solid fa-right-from-bracket text-active hover:text-secondary" />,
                     onClick: () => signout()
@@ -54,8 +53,12 @@ const Navbar = () => {
     };
     return (
         <div className="header flex justify-between p-5 items-center drop-shadow-lg">
-            <h1 className='text-3xl ml-7 font-bold drop-shadow-lg' onClick={() => { navigate('/') }}>
-                <b className='text-primary hover:text-[#ff983d]'><i className="fa-solid fa-headphones-simple" /> Fide</b><b className='text-[#f4efeb]'> yourtracks</b>
+            <h1 className='flex text-3xl ml-7 font-bold drop-shadow-lg' onClick={() => { navigate('/') }}>
+                <img
+                    className="lg:block h-10 w-auto "
+                    src="https://salmon-charming-stingray-66.mypinata.cloud/ipfs/Qmby9QDniPG7R8bE8XTJvon8KGFX7ZdKFGyYbiPCb5W4zn?_gl=1*1chzkqg*_ga*MTE0ODI0Mjc0LjE2OTY4NjQ2MTU.*_ga_5RMPXG14TE*MTY5ODIyNTk3My4zNy4xLjE2OTgyMjYwODcuMTAuMC4w"
+                />
+                <b className='ml-3 text-primary hover:text-[#ff983d]'> Fide </b><b className='text-[#f4efeb]'>  yourtracks</b>
             </h1>
             <div className="w-[850px]" />
             <button className="upload-button  hover:text-primary drop-shadow-lg"
@@ -75,7 +78,7 @@ const Navbar = () => {
 
             <button className="upload-button drop-shadow-lg hover:text-primary"
                 onClick={() => {
-                    window.location.href = "http://localhost:3005/"
+                    window.location.href = "http://localhost:3000/"
                 }}>
                 <i className="fa-solid fa-wallet fa-lg" /> NFT
             </button>

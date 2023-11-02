@@ -185,23 +185,27 @@ function AddEditSong() {
                     value={song.genre}
                     onChange={(e) => { setSong({ ...song, genre: e.target.value }) }}
                   >
-                    <option value="">--- select one ---</option>
-                    <option value="Pop">Pop</option>
-                    <option value="Hip-hop">Hip-hop</option>
-                    <option value="Rock">Rock</option>
-                    <option value="Funk">Funk</option>
+                    <option value="">--- select genre ---</option>
                     <option value="Acoutic">Acoutic</option>
-                    <option value="Country">Country</option>
-                    <option value="Jazz">Jazz</option>
+                    <option value="Alternative / Indie">Alternative / Indie</option>
                     <option value="Blues">Blues</option>
-                    <option value="J-pop">90s</option>
+                    <option value="Country">Country</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Disco">Disco</option>
+                    <option value="EDM">Electronic Dance</option>
+                    <option value="Funk">Funk</option>
+                    <option value="Hip-hop">Hip-hop</option>
+                    <option value="India">India</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Britpop">90s</option>
+                    <option value="Pop">Pop</option>
                     <option value="J-pop">J-pop</option>
                     <option value="K-pop">K-pop</option>
                     <option value="T-pop">T-pop</option>
                     <option value="Thai">ไทยสากล</option>
                     <option value="ลูกทุ่ง">ลูกทุ่ง</option>
                     <option value="หมอลำ">หมอลำ</option>
-                    <option value="India">India</option>
                   </select>
                 </Form.Item>
               </div>

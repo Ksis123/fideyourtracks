@@ -147,7 +147,7 @@ function CreateEditPlaylist() {
         </button>
       </div>
 
-      <h1 className="my-5 text-2xl">Selected Songs - {selectedSongs.length}</h1>
+      <h1 className="my-5 text-2xl">Selected Tracks - {selectedSongs.length}</h1>
 
       <div className="grid grid-cols-3 gap-3">
         {allSongs.map((song, index) => {

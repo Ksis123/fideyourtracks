@@ -170,7 +170,7 @@ function AddEditSong() {
                     type="number"
                     step="0.01"
                     min='0'
-                    max='20'
+                    max={4}
                     placeholder="Enter duration"
                     value={song.duration}
                     onChange={(e) => { setSong({ ...song, duration: e.target.value }) }}
@@ -198,7 +198,7 @@ function AddEditSong() {
                     <option value="India">India</option>
                     <option value="Jazz">Jazz</option>
                     <option value="Rock">Rock</option>
-                    <option value="Britpop">90s</option>
+                    <option value="90s">90s</option>
                     <option value="Pop">Pop</option>
                     <option value="J-pop">J-pop</option>
                     <option value="K-pop">K-pop</option>

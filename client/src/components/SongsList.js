@@ -27,7 +27,7 @@ function SongsList() {
         const tempSongs = [];
 
         selectedPlaylist.songs.forEach((song) => {
-          if (JSON.stringify(song).toLowerCase().includes(searchKey)) {
+          if (JSON.stringify(song).includes(searchKey)) {
             tempSongs.push(song);
           }
         });
@@ -61,8 +61,8 @@ function SongsList() {
       </div>
       <div className="flex cursor-pointer text-[#ff724a] font-semibold">
         <div className="w-[20vw]"><h1>Title</h1></div>
-        <div className="w-[11vw]"><h1>Artist</h1></div>
-        <div className="w-[21vw]"><h1>Genre</h1></div>
+        <div className="w-[13vw]"><h1>Artist</h1></div>
+        <div className="w-[20vw]"><h1>Genre</h1></div>
         <div className=""><i className="far fa-clock" /></div>
       </div>
       < hr />

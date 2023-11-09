@@ -113,9 +113,7 @@ function Signup() {
               </div>
             </div>
             <br />
-            <div className='text'>
-              <p>Copyright © 2023 Fideyourtracks by Ksis123</p>
-            </div>
+
           </form>
         </div>
       </div>

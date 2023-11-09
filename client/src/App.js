@@ -17,6 +17,7 @@ import ManageHome from './pages/Manage/ManageHome';
 import AddEditSong from "./pages/Manage/AddEditSong";
 import EditSong from './pages/Manage/EditSong';
 import Profile from './pages/Profile/index';
+
 function App() {
   const { loading } = useSelector((state) => state.alerts);
   return (

@@ -85,6 +85,23 @@ router.post("/get-user-data", authMiddleware, async (req, res) => {
 });
 
 
+//---------------------GET All User --------------------------------------
+router.get("/get-users", authMiddleware, async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      success: true,
+      message: "Users fetched successfully",
+      data: users,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false });
+
+  }
+});
+
+
+
 //----------------------Profile-----------------------------------------------
 router.get("/get-current-user", authMiddleware, async (req, res) => {
   try {
@@ -210,11 +227,7 @@ router.post("/reset-password", async (req, res) => {
     if (password.length < 6 || password.length > 12) {
       return res.status(200).json({ message: "Password must be 6-12 characters" });
     }
-
-    
-
     await user.save();
-    
     await Token.findOneAndDelete({ token });
 
     res

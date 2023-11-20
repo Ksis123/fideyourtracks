@@ -1,7 +1,7 @@
 # fideyourtracks
 <h1>My First Music player - Web Application </b>
 </br>
-<h5>Developed by MongoDB, Expressjs, Reactjs, Nodejs</h3>
+<h5>practice MERN stack by MongoDB, Expressjs, Reactjs, Nodejs</h3>
 
 # Overview
 </br>
